@@ -1,8 +1,19 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router"
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
 import { MainLayout, Header, InnerLayout, Sidebar, MainContent } from "src/components/layout"
+import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout")({
-	component: LayoutComponent
+	component: LayoutComponent,
+	beforeLoad: ({ context }) => {
+		if (!context?.auth?.isAuth) {
+			throw redirect({
+				to: ROUTES.LOGIN,
+				search: {
+					redirect: location.pathname
+				}
+			})
+		}
+	}
 })
 
 function LayoutComponent() {

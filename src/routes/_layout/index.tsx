@@ -8,8 +8,8 @@ export const Route = createFileRoute("/_layout/")({
 
 function HomeComponent() {
 	return (
-		<Row gutter={16}>
-			<Col span={6}>
+		<Row gutter={2} style={{ rowGap: 2 }}>
+			<Col xs={24} xl={12} xxl={6}>
 				<Card bordered={false}>
 					<Statistic
 						title={"Active"}
@@ -21,7 +21,7 @@ function HomeComponent() {
 					/>
 				</Card>
 			</Col>
-			<Col span={6}>
+			<Col xs={24} xl={12} xxl={6}>
 				<Card bordered={false}>
 					<Statistic
 						title={"Idle"}
@@ -33,7 +33,7 @@ function HomeComponent() {
 					/>
 				</Card>
 			</Col>
-			<Col span={6}>
+			<Col xs={24} xl={12} xxl={6}>
 				<Card bordered={false}>
 					<Statistic
 						title={"Active"}
@@ -45,7 +45,7 @@ function HomeComponent() {
 					/>
 				</Card>
 			</Col>
-			<Col span={6}>
+			<Col xs={24} xl={12} xxl={6}>
 				<Card bordered={false}>
 					<Statistic
 						title={"Idle"}

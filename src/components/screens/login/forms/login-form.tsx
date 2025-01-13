@@ -1,15 +1,39 @@
+import { useRouter } from "@tanstack/react-router"
 import { Button, Card, Checkbox, Flex, Form, FormProps, Input, Typography } from "antd"
-import { type  FC } from "react"
+import { type  FC, useEffect } from "react"
 import { InputMask } from "src/components/ui/input-mask"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
+import { useAuth } from "src/hooks/use-auth"
+import { type LoginForm, useLoginMutation } from "src/services/login"
+import { formatPhoneReverse } from "src/utils/formatter.utils"
 
 const LoginForm: FC = () => {
-	const [form] = Form.useForm()
+	const router = useRouter()
+	const [form] = Form.useForm<LoginForm>()
+	const auth = useAuth()
 	
-	const onFinish: FormProps["onFinish"] = (values) => {
-		console.log(values)
+	const remember = Form.useWatch("remember", form)
+	
+	const {
+		data: loginData,
+		mutate: login,
+		isPending,
+		isSuccess
+	} = useLoginMutation()
+	
+	const onFinish: FormProps<LoginForm>["onFinish"] = (values) => {
+		if (values.phone) {
+			values.phone = formatPhoneReverse(values.phone)
+		}
+		login(values)
 	}
 	
+	useEffect(() => {
+		if (loginData && isSuccess) {
+			auth.login(loginData?.data?.token, remember)
+			router.invalidate()
+		}
+	}, [auth, isSuccess, loginData, remember, router])
 	return (
 		<Flex vertical={true} align={"center"} style={{ padding: 24 }}>
 			<Card
@@ -34,7 +58,7 @@ const LoginForm: FC = () => {
 						marginTop: 40
 					}}
 				>
-					<Form.Item
+					<Form.Item<LoginForm>
 						label={"Телефон номер"}
 						name={"phone"}
 						rules={[
@@ -43,7 +67,7 @@ const LoginForm: FC = () => {
 					>
 						<InputMask mask={"+\\9\\98 99 999 99 99"} placeholder={INPUT_PLACEHOLDER} />
 					</Form.Item>
-					<Form.Item
+					<Form.Item<LoginForm>
 						label={"Пароль"}
 						name={"password"}
 						rules={[
@@ -52,7 +76,7 @@ const LoginForm: FC = () => {
 					>
 						<Input.Password placeholder={INPUT_PLACEHOLDER} />
 					</Form.Item>
-					<Form.Item
+					<Form.Item<LoginForm>
 						// noStyle={true}
 						name={"remember"}
 						valuePropName={"checked"}
@@ -63,7 +87,8 @@ const LoginForm: FC = () => {
 						</Checkbox>
 					</Form.Item>
 					<Form.Item>
-						<Button type={"primary"} htmlType={"submit"} block={true}>Войти</Button>
+						<Button loading={isPending} type={"primary"} htmlType={"submit"}
+										block={true}>Войти</Button>
 					</Form.Item>
 				</Form>
 			</Card>

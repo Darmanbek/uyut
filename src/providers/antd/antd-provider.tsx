@@ -23,8 +23,12 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 						itemHoverColor: token.colorPrimary,
 						itemSelectedBg: token.colorPrimary,
 						itemSelectedColor: token.colorWhite,
+						colorText: "rgb(90, 96, 127)",
+						itemPaddingInline: 10,
+						iconMarginInlineEnd: 16,
 						itemHeight: 46,
-						iconSize: 16,
+						iconSize: 18,
+						collapsedIconSize: 18,
           }
 				},
 				token: {
@@ -38,7 +42,7 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 			}}
 			menu={{
 				style: {
-					borderRight: 0
+					borderRight: 0,
 				}
 			}}
 			form={{
