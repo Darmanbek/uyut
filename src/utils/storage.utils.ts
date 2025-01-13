@@ -1,5 +1,5 @@
 import Cookies from "js-cookie"
-import { EnumRole, EnumToken } from "src/constants/storage.constants"
+import { EnumToken } from "src/constants/storage.constants"
 
 export const getToken = () => {
 	return Cookies.get(EnumToken.TOKEN) || ""

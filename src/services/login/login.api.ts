@@ -1,16 +1,16 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import useNotification from "antd/es/notification/useNotification"
+import { useMessage } from "src/hooks/use-message"
 import { loginService } from "src/services/login/login.service"
 import type { ResponseError } from "src/services/shared"
 
 export const useGetProfileQuery = () => {
-	const [notification] = useNotification()
+	const { message } = useMessage()
 	return useQuery({
 		queryFn: () => loginService.profile(),
 		queryKey: ["login"],
 		placeholderData: keepPreviousData,
 		throwOnError: (error: ResponseError) => {
-			notification.error({
+			message.error({
 				message: error.message,
 				description: error?.response?.data?.message
 			})
@@ -20,7 +20,7 @@ export const useGetProfileQuery = () => {
 }
 
 export const useLoginMutation = () => {
-	const [notification] = useNotification()
+	const { message } = useMessage()
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: loginService.login,
@@ -28,13 +28,13 @@ export const useLoginMutation = () => {
 			await queryClient.invalidateQueries({
 				queryKey: ["login"]
 			})
-			notification.success({
+			message.success({
 				message: "Success",
 				description: "Login successful"
 			})
 		},
 		onError: (error: ResponseError) => {
-			notification.error({
+			message.error({
 				message: error.message,
 				description: error?.response?.data?.message
 			})

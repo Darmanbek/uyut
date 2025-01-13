@@ -1,6 +1,6 @@
-import React from "react"
 import ReactDOM from "react-dom/client"
 import { App } from "src/app"
+import React from "react"
 import { Providers } from "src/providers/providers"
 import "src/styles/app.css"
 
