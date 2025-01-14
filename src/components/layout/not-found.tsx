@@ -1,27 +1,36 @@
+import { ArrowLeftOutlined } from "@ant-design/icons"
 import { Link, NotFoundRouteProps } from "@tanstack/react-router"
+import { Button, Flex, Result, Space } from "antd"
 import { type FC, PropsWithChildren } from "react"
+import { MainLayout } from "./main-layout"
 
 const NotFound: FC<PropsWithChildren<NotFoundRouteProps>> = ({ children }) => {
 	return (
-		<>
-			<div className={"space-y-2 p-2"}>
-				<div className={"text-gray-600 dark:text-gray-400"}>
-					{children || <p>The page you are looking for does not exist.</p>}
-				</div>
-				<p className={"flex items-center gap-2 flex-wrap"}>
-					<button
-						onClick={() => window.history.back()}
-						className={"bg-emerald-500 text-white px-2 py-1 rounded uppercase font-black text-sm"}>
-						Go back
-					</button>
-					<Link
-						to={"/"}
-						className={"bg-cyan-600 text-white px-2 py-1 rounded uppercase font-black text-sm"}>
-						Start Over
-					</Link>
-				</p>
-			</div>
-		</>
+		<MainLayout>
+			<Flex align={"center"} justify={"center"} style={{ height: "100vh" }}>
+				<Result
+					status={"404"}
+					extra={
+						<Space>
+							<Button
+								icon={<ArrowLeftOutlined />}
+								type={"primary"}
+								onClick={() => window.history.back()}>
+								Назад
+							</Button>
+							<Link
+								to={"/"}
+								className={"bg-cyan-600 text-white px-2 py-1 rounded uppercase font-black text-sm"}>
+								На главную
+							</Link>
+						</Space>
+					}>
+					<div className={"text-gray-600 dark:text-gray-400"}>
+						{children || <p>Страница, которую вы ищете, не существует.</p>}
+					</div>
+				</Result>
+			</Flex>
+		</MainLayout>
 	)
 }
 

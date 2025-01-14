@@ -1,5 +1,6 @@
 import { useRouter } from "@tanstack/react-router"
 import { Button, Card, Checkbox, Flex, Form, FormProps, Input, Typography } from "antd"
+import { useResponsive } from "antd-style"
 import { type FC, useEffect } from "react"
 import { InputMask } from "src/components/ui/input-mask"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
@@ -9,18 +10,27 @@ import { formatPhoneReverse } from "src/utils/formatter.utils"
 
 const LoginForm: FC = () => {
 	const router = useRouter()
+	const { mobile } = useResponsive()
 	const [form] = Form.useForm<LoginForm>()
 	const auth = useAuth()
 
 	const remember = Form.useWatch("remember", form)
 
-	const { data: loginData, mutate: login, isPending, isSuccess } = useLoginMutation()
+	const {
+		data: loginData,
+		//  mutate: login,
+		isPending,
+		isSuccess
+	} = useLoginMutation()
 
 	const onFinish: FormProps<LoginForm>["onFinish"] = (values) => {
 		if (values.phone) {
 			values.phone = formatPhoneReverse(values.phone)
 		}
-		login(values)
+		console.log(values)
+		// login(values)
+		auth.login("Token", remember)
+		router.invalidate()
 	}
 
 	useEffect(() => {
@@ -35,14 +45,16 @@ const LoginForm: FC = () => {
 				bordered={false}
 				style={{
 					width: "100%",
-					maxWidth: 600
+					maxWidth: 550
 				}}
 				styles={{
 					body: {
-						padding: "48px 60px"
+						padding: mobile ? 24 : "48px 60px"
 					}
 				}}>
-				<Typography.Title style={{ textAlign: "center" }}>Логин</Typography.Title>
+				<Typography.Title level={mobile ? 2 : 1} style={{ textAlign: "center" }}>
+					Логин
+				</Typography.Title>
 				<Form
 					{...FORM_DEFAULT}
 					form={form}

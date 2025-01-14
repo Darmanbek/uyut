@@ -1,13 +1,14 @@
 import { ConfigProvider, theme } from "antd"
-import { type  FC, type PropsWithChildren } from "react"
 import localeRU from "antd/locale/ru_RU"
+import { type FC, type PropsWithChildren } from "react"
 import { COLORS } from "src/constants/colors.constants"
 
 const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
-	
-	const {
-		token
-	} = theme.useToken()
+	const token = theme.getDesignToken({
+		token: {
+			...COLORS
+		}
+	})
 	return (
 		<ConfigProvider
 			locale={localeRU}
@@ -15,7 +16,7 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 				components: {
 					Layout: {
 						headerHeight: 68,
-						headerPadding: 0,
+						headerPadding: 0
 					},
 					Menu: {
 						subMenuItemBg: "transparent",
@@ -28,8 +29,8 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 						iconMarginInlineEnd: 16,
 						itemHeight: 46,
 						iconSize: 18,
-						collapsedIconSize: 18,
-          }
+						collapsedIconSize: 18
+					}
 				},
 				token: {
 					...COLORS
@@ -42,13 +43,12 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 			}}
 			menu={{
 				style: {
-					borderRight: 0,
+					borderRight: 0
 				}
 			}}
 			form={{
-				requiredMark: false,
-			}}
-		>
+				requiredMark: false
+			}}>
 			{children}
 		</ConfigProvider>
 	)

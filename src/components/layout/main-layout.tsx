@@ -1,9 +1,9 @@
-import { Layout } from "antd"
+import { Layout, type LayoutProps } from "antd"
 import type { FC, PropsWithChildren } from "react"
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+const MainLayout: FC<PropsWithChildren<LayoutProps>> = ({ children, style, ...rest }) => {
 	return (
-		<Layout style={{height: "100vh"}}>
+		<Layout style={{ height: "100vh", ...style }} {...rest}>
 			{children}
 		</Layout>
 	)

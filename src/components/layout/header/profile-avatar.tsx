@@ -1,4 +1,5 @@
 import { UserOutlined } from "@ant-design/icons"
+import { useRouter } from "@tanstack/react-router"
 import {
 	Avatar,
 	Button,
@@ -10,10 +11,19 @@ import {
 	Space,
 	Typography
 } from "antd"
-import { type  FC } from "react"
+import { type FC } from "react"
 import { ROUTES } from "src/config/routes.config"
+import { useAuth } from "src/hooks/use-auth"
 
 const ProfileAvatar: FC = () => {
+	const router = useRouter()
+	const auth = useAuth()
+
+	const onLogout = () => {
+		auth.logout()
+		router.invalidate()
+	}
+
 	return (
 		<>
 			<Popover
@@ -25,7 +35,7 @@ const ProfileAvatar: FC = () => {
 					}
 				}}
 				placement={"bottomRight"}
-				content={(
+				content={
 					<Flex vertical={true}>
 						<ConfigProvider
 							theme={{
@@ -33,11 +43,10 @@ const ProfileAvatar: FC = () => {
 									Menu: {
 										itemHeight: 32,
 										iconSize: 16,
-										iconMarginInlineEnd: 10,
+										iconMarginInlineEnd: 10
 									}
 								}
-							}}
-						>
+							}}>
 							<Menu
 								mode={"inline"}
 								items={[
@@ -54,20 +63,12 @@ const ProfileAvatar: FC = () => {
 							/>
 						</ConfigProvider>
 						<Divider style={{ margin: 8 }} />
-						<Button>Logout</Button>
+						<Button onClick={onLogout}>Logout</Button>
 					</Flex>
-				)}
-			>
+				}>
 				<Space style={{ cursor: "pointer" }}>
-					<Avatar
-						src={"/favicon.png"}
-						alt={""}
-						draggable={false}
-						icon={<UserOutlined />}
-					/>
-					<Typography.Text>
-						Admin
-					</Typography.Text>
+					<Avatar src={"/favicon.png"} alt={""} draggable={false} icon={<UserOutlined />} />
+					<Typography.Text>Admin</Typography.Text>
 				</Space>
 			</Popover>
 		</>

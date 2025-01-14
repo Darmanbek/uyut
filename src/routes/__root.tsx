@@ -5,7 +5,7 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools"
 import { AuthContext } from "src/context/auth-context"
 
 export const Route = createRootRouteWithContext<{
-	queryClient: QueryClient,
+	queryClient: QueryClient
 	auth?: AuthContext
 }>()({
 	component: RootComponent

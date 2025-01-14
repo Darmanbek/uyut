@@ -1,21 +1,16 @@
-import { theme } from "antd"
 import { type  FC, type PropsWithChildren } from "react"
+import { useStylesSidebar } from "./use-styles-sidebar"
 
 interface ScrollNavProps {
 	collapsed: boolean;
 }
 
 const ScrollNav: FC<PropsWithChildren<ScrollNavProps>> = ({ children, collapsed }) => {
-	const {
-		token: { padding }
-	} = theme.useToken()
+	const { styles } = useStylesSidebar({
+		collapsed
+	})
 	return (
-		<nav style={{
-			height: "100%",
-			padding: collapsed ? `${padding}px 8px` : padding,
-			overflowX: "hidden",
-			overflowY: "auto",
-		}}>
+		<nav className={styles.nav}>
 			{children}
 		</nav>
 	)

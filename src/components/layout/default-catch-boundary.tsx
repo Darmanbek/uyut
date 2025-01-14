@@ -1,3 +1,4 @@
+import { ReloadOutlined } from "@ant-design/icons"
 import {
 	ErrorComponent,
 	ErrorComponentProps,
@@ -6,7 +7,9 @@ import {
 	useMatch,
 	useRouter
 } from "@tanstack/react-router"
+import { Button, Flex, Result, Space } from "antd"
 import { type FC } from "react"
+import { MainLayout } from "./main-layout"
 
 const DefaultCatchBoundary: FC<ErrorComponentProps> = ({ error }) => {
 	const router = useRouter()
@@ -18,37 +21,43 @@ const DefaultCatchBoundary: FC<ErrorComponentProps> = ({ error }) => {
 	console.error(error)
 
 	return (
-		<>
-			<div className={"min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6"}>
-				<ErrorComponent error={error} />
-				<div className={"flex gap-2 items-center flex-wrap"}>
-					<button
-						onClick={() => {
-							router.invalidate()
-						}}
-						className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}>
-						Try Again
-					</button>
-					{isRoot ? (
-						<Link
-							to={"/"}
-							className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}>
-							Home
-						</Link>
-					) : (
-						<Link
-							to={"/"}
-							className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
-							onClick={(e) => {
-								e.preventDefault()
-								window.history.back()
-							}}>
-							Go Back
-						</Link>
-					)}
-				</div>
-			</div>
-		</>
+		<MainLayout style={isRoot ? { height: "100vh" } : { flexGrow: 1, height: "100%" }}>
+			<Flex align={"center"} justify={"center"} style={{ height: "100%" }}>
+				<Result
+					status={"500"}
+					extra={
+						<Space>
+							<Button
+								icon={<ReloadOutlined />}
+								type={"primary"}
+								onClick={() => {
+									router.invalidate()
+								}}>
+								Перезагрузить
+							</Button>
+							{isRoot ? (
+								<Link
+									to={"/"}
+									className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}>
+									Главная
+								</Link>
+							) : (
+								<Link
+									to={"/"}
+									className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
+									onClick={(e) => {
+										e.preventDefault()
+										window.history.back()
+									}}>
+									Назад
+								</Link>
+							)}
+						</Space>
+					}>
+					<ErrorComponent error={error} />
+				</Result>
+			</Flex>
+		</MainLayout>
 	)
 }
 
