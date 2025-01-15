@@ -16,6 +16,18 @@ import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutUsersImport } from './routes/_layout/users'
 import { Route as LayoutDashboardImport } from './routes/_layout/dashboard'
+import { Route as LayoutStoreIndexImport } from './routes/_layout/store/index'
+import { Route as LayoutSalesIndexImport } from './routes/_layout/sales/index'
+import { Route as LayoutReportsIndexImport } from './routes/_layout/reports/index'
+import { Route as LayoutExpensesIndexImport } from './routes/_layout/expenses/index'
+import { Route as LayoutEmployeesIndexImport } from './routes/_layout/employees/index'
+import { Route as LayoutStoreProductsImport } from './routes/_layout/store/products'
+import { Route as LayoutSalesProductsImport } from './routes/_layout/sales/products'
+import { Route as LayoutReportsSuppliersImport } from './routes/_layout/reports/suppliers'
+import { Route as LayoutReportsDebtorsImport } from './routes/_layout/reports/debtors'
+import { Route as LayoutExpensesWriteOffProductsImport } from './routes/_layout/expenses/write-off-products'
+import { Route as LayoutExpensesListImport } from './routes/_layout/expenses/list'
+import { Route as LayoutEmployeesUsersImport } from './routes/_layout/employees/users'
 
 // Create/Update Routes
 
@@ -45,6 +57,79 @@ const LayoutUsersRoute = LayoutUsersImport.update({
 const LayoutDashboardRoute = LayoutDashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutStoreIndexRoute = LayoutStoreIndexImport.update({
+  id: '/store/',
+  path: '/store/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutSalesIndexRoute = LayoutSalesIndexImport.update({
+  id: '/sales/',
+  path: '/sales/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutReportsIndexRoute = LayoutReportsIndexImport.update({
+  id: '/reports/',
+  path: '/reports/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutExpensesIndexRoute = LayoutExpensesIndexImport.update({
+  id: '/expenses/',
+  path: '/expenses/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutEmployeesIndexRoute = LayoutEmployeesIndexImport.update({
+  id: '/employees/',
+  path: '/employees/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutStoreProductsRoute = LayoutStoreProductsImport.update({
+  id: '/store/products',
+  path: '/store/products',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutSalesProductsRoute = LayoutSalesProductsImport.update({
+  id: '/sales/products',
+  path: '/sales/products',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutReportsSuppliersRoute = LayoutReportsSuppliersImport.update({
+  id: '/reports/suppliers',
+  path: '/reports/suppliers',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutReportsDebtorsRoute = LayoutReportsDebtorsImport.update({
+  id: '/reports/debtors',
+  path: '/reports/debtors',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutExpensesWriteOffProductsRoute =
+  LayoutExpensesWriteOffProductsImport.update({
+    id: '/expenses/write-off-products',
+    path: '/expenses/write-off-products',
+    getParentRoute: () => LayoutRoute,
+  } as any)
+
+const LayoutExpensesListRoute = LayoutExpensesListImport.update({
+  id: '/expenses/list',
+  path: '/expenses/list',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutEmployeesUsersRoute = LayoutEmployeesUsersImport.update({
+  id: '/employees/users',
+  path: '/employees/users',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -87,6 +172,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/employees/users': {
+      id: '/_layout/employees/users'
+      path: '/employees/users'
+      fullPath: '/employees/users'
+      preLoaderRoute: typeof LayoutEmployeesUsersImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/expenses/list': {
+      id: '/_layout/expenses/list'
+      path: '/expenses/list'
+      fullPath: '/expenses/list'
+      preLoaderRoute: typeof LayoutExpensesListImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/expenses/write-off-products': {
+      id: '/_layout/expenses/write-off-products'
+      path: '/expenses/write-off-products'
+      fullPath: '/expenses/write-off-products'
+      preLoaderRoute: typeof LayoutExpensesWriteOffProductsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/reports/debtors': {
+      id: '/_layout/reports/debtors'
+      path: '/reports/debtors'
+      fullPath: '/reports/debtors'
+      preLoaderRoute: typeof LayoutReportsDebtorsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/reports/suppliers': {
+      id: '/_layout/reports/suppliers'
+      path: '/reports/suppliers'
+      fullPath: '/reports/suppliers'
+      preLoaderRoute: typeof LayoutReportsSuppliersImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/sales/products': {
+      id: '/_layout/sales/products'
+      path: '/sales/products'
+      fullPath: '/sales/products'
+      preLoaderRoute: typeof LayoutSalesProductsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/store/products': {
+      id: '/_layout/store/products'
+      path: '/store/products'
+      fullPath: '/store/products'
+      preLoaderRoute: typeof LayoutStoreProductsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/employees/': {
+      id: '/_layout/employees/'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof LayoutEmployeesIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/expenses/': {
+      id: '/_layout/expenses/'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof LayoutExpensesIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/reports/': {
+      id: '/_layout/reports/'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof LayoutReportsIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/sales/': {
+      id: '/_layout/sales/'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof LayoutSalesIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/store/': {
+      id: '/_layout/store/'
+      path: '/store'
+      fullPath: '/store'
+      preLoaderRoute: typeof LayoutStoreIndexImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
@@ -96,12 +265,36 @@ interface LayoutRouteChildren {
   LayoutDashboardRoute: typeof LayoutDashboardRoute
   LayoutUsersRoute: typeof LayoutUsersRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutEmployeesUsersRoute: typeof LayoutEmployeesUsersRoute
+  LayoutExpensesListRoute: typeof LayoutExpensesListRoute
+  LayoutExpensesWriteOffProductsRoute: typeof LayoutExpensesWriteOffProductsRoute
+  LayoutReportsDebtorsRoute: typeof LayoutReportsDebtorsRoute
+  LayoutReportsSuppliersRoute: typeof LayoutReportsSuppliersRoute
+  LayoutSalesProductsRoute: typeof LayoutSalesProductsRoute
+  LayoutStoreProductsRoute: typeof LayoutStoreProductsRoute
+  LayoutEmployeesIndexRoute: typeof LayoutEmployeesIndexRoute
+  LayoutExpensesIndexRoute: typeof LayoutExpensesIndexRoute
+  LayoutReportsIndexRoute: typeof LayoutReportsIndexRoute
+  LayoutSalesIndexRoute: typeof LayoutSalesIndexRoute
+  LayoutStoreIndexRoute: typeof LayoutStoreIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutDashboardRoute: LayoutDashboardRoute,
   LayoutUsersRoute: LayoutUsersRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutEmployeesUsersRoute: LayoutEmployeesUsersRoute,
+  LayoutExpensesListRoute: LayoutExpensesListRoute,
+  LayoutExpensesWriteOffProductsRoute: LayoutExpensesWriteOffProductsRoute,
+  LayoutReportsDebtorsRoute: LayoutReportsDebtorsRoute,
+  LayoutReportsSuppliersRoute: LayoutReportsSuppliersRoute,
+  LayoutSalesProductsRoute: LayoutSalesProductsRoute,
+  LayoutStoreProductsRoute: LayoutStoreProductsRoute,
+  LayoutEmployeesIndexRoute: LayoutEmployeesIndexRoute,
+  LayoutExpensesIndexRoute: LayoutExpensesIndexRoute,
+  LayoutReportsIndexRoute: LayoutReportsIndexRoute,
+  LayoutSalesIndexRoute: LayoutSalesIndexRoute,
+  LayoutStoreIndexRoute: LayoutStoreIndexRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -113,6 +306,18 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof LayoutDashboardRoute
   '/users': typeof LayoutUsersRoute
   '/': typeof LayoutIndexRoute
+  '/employees/users': typeof LayoutEmployeesUsersRoute
+  '/expenses/list': typeof LayoutExpensesListRoute
+  '/expenses/write-off-products': typeof LayoutExpensesWriteOffProductsRoute
+  '/reports/debtors': typeof LayoutReportsDebtorsRoute
+  '/reports/suppliers': typeof LayoutReportsSuppliersRoute
+  '/sales/products': typeof LayoutSalesProductsRoute
+  '/store/products': typeof LayoutStoreProductsRoute
+  '/employees': typeof LayoutEmployeesIndexRoute
+  '/expenses': typeof LayoutExpensesIndexRoute
+  '/reports': typeof LayoutReportsIndexRoute
+  '/sales': typeof LayoutSalesIndexRoute
+  '/store': typeof LayoutStoreIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -120,6 +325,18 @@ export interface FileRoutesByTo {
   '/dashboard': typeof LayoutDashboardRoute
   '/users': typeof LayoutUsersRoute
   '/': typeof LayoutIndexRoute
+  '/employees/users': typeof LayoutEmployeesUsersRoute
+  '/expenses/list': typeof LayoutExpensesListRoute
+  '/expenses/write-off-products': typeof LayoutExpensesWriteOffProductsRoute
+  '/reports/debtors': typeof LayoutReportsDebtorsRoute
+  '/reports/suppliers': typeof LayoutReportsSuppliersRoute
+  '/sales/products': typeof LayoutSalesProductsRoute
+  '/store/products': typeof LayoutStoreProductsRoute
+  '/employees': typeof LayoutEmployeesIndexRoute
+  '/expenses': typeof LayoutExpensesIndexRoute
+  '/reports': typeof LayoutReportsIndexRoute
+  '/sales': typeof LayoutSalesIndexRoute
+  '/store': typeof LayoutStoreIndexRoute
 }
 
 export interface FileRoutesById {
@@ -129,13 +346,58 @@ export interface FileRoutesById {
   '/_layout/dashboard': typeof LayoutDashboardRoute
   '/_layout/users': typeof LayoutUsersRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/employees/users': typeof LayoutEmployeesUsersRoute
+  '/_layout/expenses/list': typeof LayoutExpensesListRoute
+  '/_layout/expenses/write-off-products': typeof LayoutExpensesWriteOffProductsRoute
+  '/_layout/reports/debtors': typeof LayoutReportsDebtorsRoute
+  '/_layout/reports/suppliers': typeof LayoutReportsSuppliersRoute
+  '/_layout/sales/products': typeof LayoutSalesProductsRoute
+  '/_layout/store/products': typeof LayoutStoreProductsRoute
+  '/_layout/employees/': typeof LayoutEmployeesIndexRoute
+  '/_layout/expenses/': typeof LayoutExpensesIndexRoute
+  '/_layout/reports/': typeof LayoutReportsIndexRoute
+  '/_layout/sales/': typeof LayoutSalesIndexRoute
+  '/_layout/store/': typeof LayoutStoreIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/login' | '/dashboard' | '/users' | '/'
+  fullPaths:
+    | ''
+    | '/login'
+    | '/dashboard'
+    | '/users'
+    | '/'
+    | '/employees/users'
+    | '/expenses/list'
+    | '/expenses/write-off-products'
+    | '/reports/debtors'
+    | '/reports/suppliers'
+    | '/sales/products'
+    | '/store/products'
+    | '/employees'
+    | '/expenses'
+    | '/reports'
+    | '/sales'
+    | '/store'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/dashboard' | '/users' | '/'
+  to:
+    | '/login'
+    | '/dashboard'
+    | '/users'
+    | '/'
+    | '/employees/users'
+    | '/expenses/list'
+    | '/expenses/write-off-products'
+    | '/reports/debtors'
+    | '/reports/suppliers'
+    | '/sales/products'
+    | '/store/products'
+    | '/employees'
+    | '/expenses'
+    | '/reports'
+    | '/sales'
+    | '/store'
   id:
     | '__root__'
     | '/_layout'
@@ -143,6 +405,18 @@ export interface FileRouteTypes {
     | '/_layout/dashboard'
     | '/_layout/users'
     | '/_layout/'
+    | '/_layout/employees/users'
+    | '/_layout/expenses/list'
+    | '/_layout/expenses/write-off-products'
+    | '/_layout/reports/debtors'
+    | '/_layout/reports/suppliers'
+    | '/_layout/sales/products'
+    | '/_layout/store/products'
+    | '/_layout/employees/'
+    | '/_layout/expenses/'
+    | '/_layout/reports/'
+    | '/_layout/sales/'
+    | '/_layout/store/'
   fileRoutesById: FileRoutesById
 }
 
@@ -175,7 +449,19 @@ export const routeTree = rootRoute
       "children": [
         "/_layout/dashboard",
         "/_layout/users",
-        "/_layout/"
+        "/_layout/",
+        "/_layout/employees/users",
+        "/_layout/expenses/list",
+        "/_layout/expenses/write-off-products",
+        "/_layout/reports/debtors",
+        "/_layout/reports/suppliers",
+        "/_layout/sales/products",
+        "/_layout/store/products",
+        "/_layout/employees/",
+        "/_layout/expenses/",
+        "/_layout/reports/",
+        "/_layout/sales/",
+        "/_layout/store/"
       ]
     },
     "/login": {
@@ -191,6 +477,54 @@ export const routeTree = rootRoute
     },
     "/_layout/": {
       "filePath": "_layout/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/employees/users": {
+      "filePath": "_layout/employees/users.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/expenses/list": {
+      "filePath": "_layout/expenses/list.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/expenses/write-off-products": {
+      "filePath": "_layout/expenses/write-off-products.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/reports/debtors": {
+      "filePath": "_layout/reports/debtors.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/reports/suppliers": {
+      "filePath": "_layout/reports/suppliers.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/sales/products": {
+      "filePath": "_layout/sales/products.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/store/products": {
+      "filePath": "_layout/store/products.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/employees/": {
+      "filePath": "_layout/employees/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/expenses/": {
+      "filePath": "_layout/expenses/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/reports/": {
+      "filePath": "_layout/reports/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/sales/": {
+      "filePath": "_layout/sales/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/store/": {
+      "filePath": "_layout/store/index.tsx",
       "parent": "/_layout"
     }
   }

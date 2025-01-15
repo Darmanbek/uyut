@@ -1,5 +1,5 @@
 import { Layout } from "antd"
-import { type  FC, PropsWithChildren } from "react"
+import { type FC, PropsWithChildren } from "react"
 
 const MainContent: FC<PropsWithChildren> = ({ children }) => {
 	return (
@@ -10,9 +10,11 @@ const MainContent: FC<PropsWithChildren> = ({ children }) => {
 					margin: 0,
 					minHeight: 280,
 					overflowX: "hidden",
-					overflowY: "auto"
-				}}
-			>
+					overflowY: "auto",
+					display: "flex",
+					flexDirection: "column",
+					gap: 20
+				}}>
 				{children}
 			</Layout.Content>
 		</>

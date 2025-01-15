@@ -31,7 +31,7 @@ export const menu: MenuProps["items"] = [
 		label: "Склад"
 	},
 	{
-		key: ROUTES.PRODUCTS,
+		key: ROUTES.STORE_PRODUCTS,
 		icon: <ImportOutlined />,
 		label: "Список проходов"
 	},
@@ -55,7 +55,7 @@ export const menu: MenuProps["items"] = [
 		label: "Сотрудники"
 	},
 	{
-		key: ROUTES.EMPLOYEES,
+		key: ROUTES.EMPLOYEES_USERS,
 		icon: <TeamOutlined />,
 		label: "Список сотрудников"
 	},

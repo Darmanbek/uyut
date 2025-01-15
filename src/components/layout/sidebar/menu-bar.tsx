@@ -31,7 +31,10 @@ const MenuBar: FC = () => {
 					theme={"light"}
 					defaultSelectedKeys={[pathname]}
 					onSelect={(item) => onSelectMenu(item.key)}
-					style={{ height: "100%", borderRight: 0, background: colorBgLayout }}
+					style={{
+						borderRight: 0,
+						background: colorBgLayout
+					}}
 					items={menu}
 				/>
 			</ConfigProvider>

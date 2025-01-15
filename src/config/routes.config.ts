@@ -7,31 +7,31 @@ class Routes {
 	DASHBOARD = "/dashboard"
 
 	STORE_GROUP = "/store"
-	PRODUCTS = "/products"
+	STORE_PRODUCTS = "/store/products"
 
 	SALES_GROUP = "/sales"
-	SALES_PRODUCTS = "/sales-products"
+	SALES_PRODUCTS = "/sales/products"
 
-	EMPLOYEES_GROUP = "/Employees"
-	EMPLOYEES = "/employees"
+	EMPLOYEES_GROUP = "/employees"
+	EMPLOYEES_USERS = "/employees/users"
 
-	REPORT_GROUP = "/Report"
-	REPORT_PRODUCTS = "/products"
-	REPORT_SALES_PRODUCTS = "/sales-products"
-	REPORT_WRITE_OFF_PRODUCTS = "/write-off-products"
-	REPORT_EXPENSES = "/expenses"
-	REPORT_RECOMMENDED_ORDERS = "/orders"
-	REPORT_SUPPLIERS = "/suppliers"
-	REPORT_DEBTORS = "/debtors"
+	REPORT_GROUP = "/reports"
+	REPORT_PRODUCTS = "/reports/products"
+	REPORT_SALES_PRODUCTS = "/reports/sales-products"
+	REPORT_WRITE_OFF_PRODUCTS = "/reports/write-off-products"
+	REPORT_EXPENSES = "/reports/expenses"
+	REPORT_RECOMMENDED_ORDERS = "/reports/orders"
+	REPORT_SUPPLIERS = "/reports/suppliers"
+	REPORT_DEBTORS = "/reports/debtors"
 
-	FINANCES_GROUP = "/Finances"
-	FINANCES_COMING_PRODUCTS = "/coming-products"
-	FINANCES_SALE_PRODUCTS = "/sale-products"
-	FINANCES_WRITE_OFF_PRODUCTS = "/write-off-products"
+	FINANCES_GROUP = "/finances"
+	FINANCES_COMING_PRODUCTS = "/finances/coming-products"
+	FINANCES_SALE_PRODUCTS = "/finances/sale-products"
+	FINANCES_WRITE_OFF_PRODUCTS = "/finances/write-off-products"
 
-	EXPENSES_GROUP = "/Expenses"
-	EXPENSES_LIST = "/expenses"
-	EXPENSES_WRITE_OFF_PRODUCTS = "/write-off-products"
+	EXPENSES_GROUP = "/expenses"
+	EXPENSES_LIST = "/expenses/list"
+	EXPENSES_WRITE_OFF_PRODUCTS = "/expenses/write-off-products"
 }
 
 export const ROUTES = new Routes()

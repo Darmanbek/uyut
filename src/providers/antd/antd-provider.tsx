@@ -1,18 +1,27 @@
 import { ConfigProvider, theme } from "antd"
 import localeRU from "antd/locale/ru_RU"
 import { type FC, type PropsWithChildren } from "react"
-import { COLORS } from "src/constants/colors.constants"
+import { DARK_COLORS, LIGHT_COLORS } from "src/constants/colors.constants"
 
 const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
+	const isDark = false
+
+	const currentAlgorithm = isDark ? theme.darkAlgorithm : theme.defaultAlgorithm
+	const { colorTextMenu, colorTextSelectedMenu, ...restColors } = isDark
+		? DARK_COLORS
+		: LIGHT_COLORS
+
 	const token = theme.getDesignToken({
+		algorithm: currentAlgorithm,
 		token: {
-			...COLORS
+			...restColors
 		}
 	})
 	return (
 		<ConfigProvider
 			locale={localeRU}
 			theme={{
+				algorithm: currentAlgorithm,
 				components: {
 					Layout: {
 						headerHeight: 68,
@@ -23,8 +32,8 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 						itemHoverBg: token.colorPrimaryBg,
 						itemHoverColor: token.colorPrimary,
 						itemSelectedBg: token.colorPrimary,
-						itemSelectedColor: token.colorWhite,
-						colorText: "rgb(90, 96, 127)",
+						itemSelectedColor: colorTextSelectedMenu,
+						colorText: colorTextMenu,
 						itemPaddingInline: 10,
 						iconMarginInlineEnd: 16,
 						itemHeight: 46,
@@ -33,7 +42,7 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 					}
 				},
 				token: {
-					...COLORS
+					...restColors
 				}
 			}}
 			typography={{
