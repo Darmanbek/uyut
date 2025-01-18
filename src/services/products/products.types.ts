@@ -13,3 +13,13 @@ export type Product = {
 	print_details: PrintDetail[]
 	created_at: string
 }
+
+export type ProductForm = {
+	name: string
+	width: number
+	length: number
+	meter_square: number
+	price_uzs: string | number
+	price_usd: string | number
+	supplier_id: number
+}

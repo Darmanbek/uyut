@@ -1,5 +1,14 @@
 import { useRouter } from "@tanstack/react-router"
-import { Button, Card, Checkbox, Flex, Form, FormProps, Input, Typography } from "antd"
+import {
+	Button,
+	Card,
+	Checkbox,
+	Flex,
+	Form,
+	FormProps,
+	Input,
+	Typography
+} from "antd"
 import { useResponsive } from "antd-style"
 import { type FC, useEffect } from "react"
 import { InputMask } from "src/components/ui/input-mask"
@@ -18,7 +27,7 @@ const LoginForm: FC = () => {
 
 	const {
 		data: loginData,
-		//  mutate: login,
+		mutate: login,
 		isPending,
 		isSuccess
 	} = useLoginMutation()
@@ -27,10 +36,7 @@ const LoginForm: FC = () => {
 		if (values.phone) {
 			values.phone = formatPhoneReverse(values.phone)
 		}
-		console.log(values)
-		// login(values)
-		auth.login("Token", remember)
-		router.invalidate()
+		login(values)
 	}
 
 	useEffect(() => {
@@ -52,7 +58,9 @@ const LoginForm: FC = () => {
 						padding: mobile ? 24 : "48px 60px"
 					}
 				}}>
-				<Typography.Title level={mobile ? 2 : 1} style={{ textAlign: "center" }}>
+				<Typography.Title
+					level={mobile ? 2 : 1}
+					style={{ textAlign: "center" }}>
 					Логин
 				</Typography.Title>
 				<Form
@@ -63,10 +71,19 @@ const LoginForm: FC = () => {
 					style={{
 						marginTop: 40
 					}}>
-					<Form.Item<LoginForm> label={"Телефон номер"} name={"phone"} rules={[{ required: true }]}>
-						<InputMask mask={"+\\9\\98 99 999 99 99"} placeholder={INPUT_PLACEHOLDER} />
+					<Form.Item<LoginForm>
+						label={"Телефон номер"}
+						name={"phone"}
+						rules={[{ required: true }]}>
+						<InputMask
+							mask={"+\\9\\98 99 999 99 99"}
+							placeholder={INPUT_PLACEHOLDER}
+						/>
 					</Form.Item>
-					<Form.Item<LoginForm> label={"Пароль"} name={"password"} rules={[{ required: true }]}>
+					<Form.Item<LoginForm>
+						label={"Пароль"}
+						name={"password"}
+						rules={[{ required: true }]}>
 						<Input.Password placeholder={INPUT_PLACEHOLDER} />
 					</Form.Item>
 					<Form.Item<LoginForm>
@@ -77,7 +94,11 @@ const LoginForm: FC = () => {
 						<Checkbox>Запомнить меня</Checkbox>
 					</Form.Item>
 					<Form.Item>
-						<Button loading={isPending} type={"primary"} htmlType={"submit"} block={true}>
+						<Button
+							loading={isPending}
+							type={"primary"}
+							htmlType={"submit"}
+							block={true}>
 							Войти
 						</Button>
 					</Form.Item>

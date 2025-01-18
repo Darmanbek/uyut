@@ -8,8 +8,18 @@ import { routeTree } from "./routeTree.gen"
 
 // Set up a Router instance
 export const createRouter = () => {
-	const queryClient = new QueryClient({})
-	
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				refetchOnMount: false,
+				refetchOnWindowFocus: false,
+				staleTime: 36000,
+				retry: 1,
+				retryDelay: 1000
+			}
+		}
+	})
+
 	return routerWithQueryClient(
 		createTanStackRouter({
 			routeTree,

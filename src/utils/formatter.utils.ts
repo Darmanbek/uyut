@@ -5,7 +5,14 @@ export const formatPhone = (phone?: string) => {
 }
 
 export const formatPhoneReverse = (phone?: string) => {
-	return phone
-		? phone.replace(/ /g, "")
-		: "-"
+	return phone ? phone.replace(/ /g, "") : "-"
+}
+
+export const formatEmpty = <T>(value?: T) => value ?? "-"
+
+export const formatPrice = <T>(value?: T) => {
+	if (value === undefined || isNaN(Number(value))) {
+		return "0"
+	}
+	return Intl.NumberFormat("ru-RU", {}).format(Number(value))
 }

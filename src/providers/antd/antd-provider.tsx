@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from "antd"
+import { App, ConfigProvider, theme } from "antd"
 import localeRU from "antd/locale/ru_RU"
 import { type FC, type PropsWithChildren } from "react"
 import { DARK_COLORS, LIGHT_COLORS } from "src/constants/colors.constants"
@@ -58,7 +58,7 @@ const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 			form={{
 				requiredMark: false
 			}}>
-			{children}
+			<App>{children}</App>
 		</ConfigProvider>
 	)
 }

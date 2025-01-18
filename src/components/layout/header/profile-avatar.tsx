@@ -8,22 +8,31 @@ import {
 	Flex,
 	Menu,
 	Popover,
+	Skeleton,
 	Space,
 	Typography
 } from "antd"
-import { type FC } from "react"
+import { useCallback, useEffect, type FC } from "react"
 import { ROUTES } from "src/config/routes.config"
 import { useAuth } from "src/hooks/use-auth"
+import { useGetProfileQuery } from "src/services/login"
 
 const ProfileAvatar: FC = () => {
 	const router = useRouter()
 	const auth = useAuth()
 
-	const onLogout = () => {
+	const { data: profile, isError, isLoading } = useGetProfileQuery()
+
+	const onLogout = useCallback(() => {
 		auth.logout()
 		router.invalidate()
-	}
+	}, [auth, router])
 
+	useEffect(() => {
+		if (isError) {
+			onLogout()
+		}
+	}, [isError, onLogout])
 	return (
 		<>
 			<Popover
@@ -66,9 +75,23 @@ const ProfileAvatar: FC = () => {
 						<Button onClick={onLogout}>Logout</Button>
 					</Flex>
 				}>
-				<Space style={{ cursor: "pointer" }}>
-					<Avatar src={"/favicon.png"} alt={""} draggable={false} icon={<UserOutlined />} />
-					<Typography.Text>Admin</Typography.Text>
+				<Space style={{ cursor: "pointer" }} align={"center"}>
+					<Avatar
+						src={"/favicon.png"}
+						alt={""}
+						draggable={false}
+						icon={<UserOutlined />}
+					/>
+					<Typography.Text>
+						{isLoading ? (
+							<Skeleton.Input
+								active={true}
+								style={{ minWidth: 100, width: 100, height: 24 }}
+							/>
+						) : (
+							profile?.data?.name || profile?.data?.role?.name
+						)}
+					</Typography.Text>
 				</Space>
 			</Popover>
 		</>

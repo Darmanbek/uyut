@@ -9,7 +9,7 @@ class LoginService {
 	}
 
 	profile = async (): Promise<ResponseSingleData<Profile>> => {
-		const response = await api.post("/profile")
+		const response = await api.get("/profile")
 		return response.data
 	}
 }
