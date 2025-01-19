@@ -2,10 +2,12 @@ import { useLocation, useRouter } from "@tanstack/react-router"
 import { ConfigProvider, Menu, theme } from "antd"
 import { type FC } from "react"
 import { useMenuStore } from "src/store/use-menu-store"
+import { useThemeStore } from "src/store/use-theme-store"
 import { menu } from "./menu.data"
 
 const MenuBar: FC = () => {
 	const router = useRouter()
+	const { theme: mode } = useThemeStore()
 	const { collapsed } = useMenuStore()
 	const { pathname } = useLocation()
 
@@ -15,9 +17,7 @@ const MenuBar: FC = () => {
 		})
 	}
 
-	const {
-		token: { colorBgLayout }
-	} = theme.useToken()
+	const { token } = theme.useToken()
 	return (
 		<>
 			<ConfigProvider
@@ -30,12 +30,13 @@ const MenuBar: FC = () => {
 				}}>
 				<Menu
 					mode={"inline"}
-					theme={"light"}
+					theme={mode}
 					defaultSelectedKeys={[pathname]}
+					selectedKeys={[pathname]}
 					onSelect={(item) => onSelectMenu(item.key)}
 					style={{
 						borderRight: 0,
-						background: colorBgLayout
+						background: token.colorBgContainer
 					}}
 					items={menu?.filter((el) => (collapsed ? el?.type !== "group" : el))}
 				/>

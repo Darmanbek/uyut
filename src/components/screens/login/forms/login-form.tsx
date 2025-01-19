@@ -11,7 +11,7 @@ import {
 } from "antd"
 import { useResponsive } from "antd-style"
 import { type FC, useEffect } from "react"
-import { InputMask } from "src/components/ui/input-mask"
+import { PatternFormat } from "react-number-format"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
 import { useAuth } from "src/hooks/use-auth"
 import { type LoginForm, useLoginMutation } from "src/services/login"
@@ -74,10 +74,12 @@ const LoginForm: FC = () => {
 					<Form.Item<LoginForm>
 						label={"Телефон номер"}
 						name={"phone"}
-						rules={[{ required: true }]}>
-						<InputMask
-							mask={"+\\9\\98 99 999 99 99"}
+						rules={[{ required: true }]}
+						initialValue={""}>
+						<PatternFormat
 							placeholder={INPUT_PLACEHOLDER}
+							format={"+998 ## ### ## ##"}
+							customInput={Input}
 						/>
 					</Form.Item>
 					<Form.Item<LoginForm>

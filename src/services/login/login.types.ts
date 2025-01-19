@@ -1,20 +1,21 @@
-import { Role } from "src/services/shared/shared.types"
+import type { Role } from "src/services/shared/roles"
 
-
-export type LoginForm = {
+type LoginForm = {
 	phone: string
 	password: string
 	remember: boolean
 }
 
-export type LoginData = {
+type LoginData = {
 	phone: string
 	token: string
 }
 
-export type Profile = {
+type Profile = {
 	id: number
 	name: string
 	phone: string
 	role: Role
 }
+
+export type { LoginForm, LoginData, Profile }

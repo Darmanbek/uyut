@@ -8,7 +8,7 @@ import { useMessage } from "src/hooks/use-message"
 import { loginService } from "src/services/login/login.service"
 import type { ResponseError } from "src/services/shared"
 
-export const useGetProfileQuery = () => {
+const useGetProfileQuery = () => {
 	const { message } = useMessage()
 	return useQuery({
 		queryFn: () => loginService.profile(),
@@ -24,7 +24,7 @@ export const useGetProfileQuery = () => {
 	})
 }
 
-export const useLoginMutation = () => {
+const useLoginMutation = () => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
 	return useMutation({
@@ -33,6 +33,7 @@ export const useLoginMutation = () => {
 			await queryClient.invalidateQueries({
 				queryKey: ["login"]
 			})
+			await queryClient.invalidateQueries()
 			message.success({
 				message: "Success",
 				description: "Login successful"
@@ -46,3 +47,5 @@ export const useLoginMutation = () => {
 		}
 	})
 }
+
+export { useGetProfileQuery, useLoginMutation }

@@ -1,7 +1,7 @@
-import { ExpenseType } from "../shared/expense-types"
-import { User } from "../users"
+import type { ExpenseType } from "src/services/shared/expense-types"
+import type { User } from "src/services/users"
 
-export type Expense = {
+type Expense = {
 	id: number
 	expense_type: ExpenseType
 	title: string
@@ -9,3 +9,5 @@ export type Expense = {
 	cashier: User
 	created_at: string
 }
+
+export type { Expense }

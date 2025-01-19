@@ -12,13 +12,15 @@ import {
 	Space,
 	Typography
 } from "antd"
-import { useCallback, useEffect, type FC } from "react"
+import { type FC, useCallback, useEffect } from "react"
 import { ROUTES } from "src/config/routes.config"
 import { useAuth } from "src/hooks/use-auth"
 import { useGetProfileQuery } from "src/services/login"
+import { useThemeStore } from "src/store/use-theme-store"
 
 const ProfileAvatar: FC = () => {
 	const router = useRouter()
+	const { theme } = useThemeStore()
 	const auth = useAuth()
 
 	const { data: profile, isError, isLoading } = useGetProfileQuery()
@@ -58,6 +60,7 @@ const ProfileAvatar: FC = () => {
 							}}>
 							<Menu
 								mode={"inline"}
+								theme={theme}
 								items={[
 									{
 										key: ROUTES.PROFILE,
@@ -72,7 +75,9 @@ const ProfileAvatar: FC = () => {
 							/>
 						</ConfigProvider>
 						<Divider style={{ margin: 8 }} />
-						<Button onClick={onLogout}>Logout</Button>
+						<Button danger={true} onClick={onLogout}>
+							Logout
+						</Button>
 					</Flex>
 				}>
 				<Space style={{ cursor: "pointer" }} align={"center"}>

@@ -1,4 +1,6 @@
-export type PaymentType = {
+type PaymentType = {
 	id: number
 	name: string
 }
+
+export type { PaymentType }

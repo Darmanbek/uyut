@@ -3,7 +3,7 @@ import { useMessage } from "src/hooks/use-message"
 import { GetParams, ResponseError } from "../shared"
 import { productsService } from "./products.service"
 
-export const useGetProductsQuery = (params: GetParams) => {
+const useGetProductsQuery = (params: GetParams) => {
 	const { message } = useMessage()
 	return useQuery({
 		queryFn: () => productsService.get(params),
@@ -18,3 +18,5 @@ export const useGetProductsQuery = (params: GetParams) => {
 		}
 	})
 }
+
+export { useGetProductsQuery }

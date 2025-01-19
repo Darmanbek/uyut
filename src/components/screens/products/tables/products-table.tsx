@@ -5,18 +5,32 @@ import { Table } from "src/components/ui/table"
 import { type Product, useGetProductsQuery } from "src/services/products"
 import { useProductsColumns } from "../hooks/use-products-columns"
 
-const ProductsTable: FC = () => {
-	const { data: products, isLoading, isFetching } = useGetProductsQuery({})
+interface ProductsTableProps {
+	readonly?: boolean
+}
+
+const ProductsTable: FC<ProductsTableProps> = ({ readonly }) => {
+	const {
+		data: products,
+		isLoading,
+		isFetching
+	} = useGetProductsQuery({
+		page: 1,
+		limit: 10
+	})
 
 	const columns = useProductsColumns()
 	return (
 		<>
 			<Table<Product>
+				rowKey={(record) => record.id}
 				title={"Товары"}
 				extra={
-					<Button type={"primary"} icon={<PlusOutlined />}>
-						Добавить
-					</Button>
+					readonly ? null : (
+						<Button type={"primary"} icon={<PlusOutlined />}>
+							Добавить
+						</Button>
+					)
 				}
 				loading={isLoading || isFetching}
 				columns={columns}

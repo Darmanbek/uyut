@@ -1,7 +1,7 @@
 import { createStyles, css } from "antd-style"
 
 interface StylesSidebarProps {
-	collapsed: boolean
+	collapsed?: boolean
 }
 
 export const useStylesSidebar = createStyles(
@@ -19,12 +19,12 @@ export const useStylesSidebar = createStyles(
 				scrollbar-color: transparent transparent;
 
 				&:hover {
-					scrollbar-color: #eaeaea transparent;
+					scrollbar-color: ${token.colorBorder} transparent;
 				}
 			}
 
 			&:hover {
-				scrollbar-color: #eaeaea transparent;
+				scrollbar-color: ${token.colorBorder} transparent;
 			}
 		`
 	})

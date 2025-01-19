@@ -1,4 +1,6 @@
-export type PrintType = {
+type PrintType = {
 	id: number
 	name: string
 }
+
+export type { PrintType }

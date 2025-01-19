@@ -6,17 +6,16 @@ import { useMenuStore } from "src/store/use-menu-store"
 const Sidebar: FC = () => {
 	const { collapsed } = useMenuStore()
 
-	const {
-		token: { colorBgLayout, colorBorder }
-	} = theme.useToken()
+	const { token } = theme.useToken()
 	return (
 		<>
 			<Layout.Sider
 				width={270}
 				collapsed={collapsed}
 				style={{
-					background: colorBgLayout,
-					borderRight: `1px solid ${colorBorder}`
+					background: token.colorBgContainer,
+					boxShadow: token.boxShadowSecondary
+					// borderRight: `1px solid ${token.colorBorder}`
 				}}>
 				<ScrollNav collapsed={collapsed}>
 					<MenuBar />

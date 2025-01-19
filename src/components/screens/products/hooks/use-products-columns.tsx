@@ -1,8 +1,15 @@
+import { EyeFilled } from "@ant-design/icons"
+import { useLocation, useRouter } from "@tanstack/react-router"
+import { Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
+import { Button } from "src/components/ui/button"
 import type { Product } from "src/services/products"
-import { formatEmpty, formatPrice } from "src/utils/formatter.utils"
+import { formatDate, formatEmpty, formatPrice } from "src/utils/formatter.utils"
 
 export const useProductsColumns = () => {
+	const { history } = useRouter()
+	const { pathname } = useLocation()
+
 	const columns: ColumnsType<Product> = [
 		{
 			title: "Название",
@@ -51,6 +58,38 @@ export const useProductsColumns = () => {
 					render: formatPrice
 				}
 			]
+		},
+		{
+			title: "Поставщик",
+			dataIndex: ["supplier", "name"],
+			key: "supplier",
+			render: formatEmpty
+		},
+		{
+			title: "Остаток площади",
+			dataIndex: "remainder_square_meter",
+			key: "remainder_square_meter",
+			render: formatEmpty
+		},
+		{
+			title: "Создан",
+			dataIndex: "created_at",
+			key: "created_at",
+			render: formatDate
+		},
+		{
+			width: 50,
+			title: "",
+			key: "actions",
+			render: (_v, record) => (
+				<Space>
+					<Button
+						onClick={() => history.push(`${pathname}/${record.id}`)}
+						tooltip={"Открыть"}
+						icon={<EyeFilled />}
+					/>
+				</Space>
+			)
 		}
 	]
 

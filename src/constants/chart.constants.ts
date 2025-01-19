@@ -1,3 +1,5 @@
-export const LOADING_OPTION = {
+const LOADING_OPTION = {
 	text: "Загрузка..."
 }
+
+export { LOADING_OPTION }

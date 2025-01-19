@@ -1,12 +1,16 @@
 import {
+	AppstoreAddOutlined,
 	CheckSquareOutlined,
+	ClockCircleOutlined,
 	DollarCircleOutlined,
 	ExportOutlined,
 	HomeOutlined,
 	ImportOutlined,
 	MinusCircleOutlined,
 	MinusSquareOutlined,
+	MoneyCollectOutlined,
 	PlusCircleOutlined,
+	PrinterOutlined,
 	TeamOutlined,
 	UnorderedListOutlined,
 	UsergroupAddOutlined,
@@ -121,6 +125,11 @@ export const menu: MenuProps["items"] = [
 		label: "Продажа"
 	},
 	{
+		key: ROUTES.FINANCES_EXPENSES,
+		icon: <ClockCircleOutlined />,
+		label: "Расходы"
+	},
+	{
 		key: ROUTES.EXPENSES_GROUP,
 		type: "group",
 		label: "Расходы"
@@ -134,46 +143,25 @@ export const menu: MenuProps["items"] = [
 		key: ROUTES.EXPENSES_WRITE_OFF_PRODUCTS,
 		icon: <UnorderedListOutlined />,
 		label: "Список списания"
+	},
+	{
+		key: ROUTES.SETTINGS_GROUP,
+		type: "group",
+		label: "Настройки"
+	},
+	{
+		key: ROUTES.SETTINGS_PRINT_TYPES,
+		icon: <PrinterOutlined />,
+		label: "Типы печати"
+	},
+	{
+		key: ROUTES.SETTINGS_PAYMENT_TYPES,
+		icon: <MoneyCollectOutlined />,
+		label: "Типы оплаты"
+	},
+	{
+		key: ROUTES.SETTINGS_EXPENSE_TYPES,
+		icon: <AppstoreAddOutlined />,
+		label: "Типы расходов"
 	}
-
-	// {
-	// 	key: ROUTES.CATEGORIES,
-	// 	icon: <FolderOutlined />,
-	// 	label: "Categories"
-	// },
-	// {
-	// 	key: ROUTES.CUSTOMERS,
-	// 	icon: <TeamOutlined />,
-	// 	label: "Customers"
-	// },
-	// {
-	// 	key: ROUTES.REPORTS,
-	// 	icon: <BarChartOutlined />,
-	// 	label: "Reports"
-	// },
-	// {
-	// 	key: ROUTES.COUPONS,
-	// 	icon: <StarOutlined />,
-	// 	label: "Coupons"
-	// },
-	// {
-	// 	key: ROUTES.INBOX,
-	// 	icon: <InboxOutlined />,
-	// 	label: "Inbox"
-	// },
-	// {
-	// 	key: ROUTES.SETTINGS_GROUP,
-	// 	type: "group",
-	// 	label: "Settings"
-	// },
-	// {
-	// 	key: ROUTES.PERSONAL_SETTINGS,
-	// 	icon: <UserOutlined />,
-	// 	label: "Personal Settings"
-	// },
-	// {
-	// 	key: ROUTES.GLOBAL_SETTINGS,
-	// 	icon: <SettingOutlined />,
-	// 	label: "Global Settings"
-	// }
 ]

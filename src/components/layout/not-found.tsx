@@ -10,6 +10,7 @@ const NotFound: FC<PropsWithChildren<NotFoundRouteProps>> = ({ children }) => {
 			<Flex align={"center"} justify={"center"} style={{ height: "100vh" }}>
 				<Result
 					status={"404"}
+					title={"404"}
 					extra={
 						<Space>
 							<Button
@@ -18,14 +19,10 @@ const NotFound: FC<PropsWithChildren<NotFoundRouteProps>> = ({ children }) => {
 								onClick={() => window.history.back()}>
 								Назад
 							</Button>
-							<Link
-								to={"/"}
-								className={"bg-cyan-600 text-white px-2 py-1 rounded uppercase font-black text-sm"}>
-								На главную
-							</Link>
+							<Link to={"/"}>На главную</Link>
 						</Space>
 					}>
-					<div className={"text-gray-600 dark:text-gray-400"}>
+					<div>
 						{children || <p>Страница, которую вы ищете, не существует.</p>}
 					</div>
 				</Result>

@@ -1,3 +1,5 @@
+import dayjs from "dayjs"
+
 export const formatPhone = (phone?: string) => {
 	return phone
 		? phone.replace(/(\+\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5")
@@ -10,9 +12,33 @@ export const formatPhoneReverse = (phone?: string) => {
 
 export const formatEmpty = <T>(value?: T) => value ?? "-"
 
-export const formatPrice = <T>(value?: T) => {
+export const formatMetre = <T>(value?: T) => (value ?? "0") + " m"
+
+export const formatPrice = <T>(value?: T): string => {
 	if (value === undefined || isNaN(Number(value))) {
 		return "0"
 	}
 	return Intl.NumberFormat("ru-RU", {}).format(Number(value))
 }
+
+export const formatPriceUZS = <T>(value?: T): string => {
+	if (value === undefined || isNaN(Number(value))) {
+		return "0"
+	}
+	return Intl.NumberFormat("ru-RU", {}).format(Number(value)) + " UZS"
+}
+
+export const formatPriceUSD = <T>(value?: T): string => {
+	if (value === undefined || isNaN(Number(value))) {
+		return "0"
+	}
+	return Intl.NumberFormat("ru-RU", {}).format(Number(value)) + " USD"
+}
+
+export const formatDate = <T extends dayjs.ConfigType>(value?: T): string =>
+	dayjs(value).format("DD.MM.YYYY")
+
+export const formatDateTransform = <T extends dayjs.ConfigType>(
+	value?: T,
+	format?: string
+): string => dayjs(value).format(format || "DD.MM.YYYY")
