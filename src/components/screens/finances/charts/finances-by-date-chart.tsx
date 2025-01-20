@@ -9,29 +9,41 @@ import {
 	financePriceTypesData,
 	financeTypesData
 } from "src/constants/data.constants"
-import { useGetComingProductsByDateQuery } from "src/services/coming-products"
-import type { FinancePriceType, FinanceType } from "src/services/shared"
-import { useComingProductsByYearOption } from "../hooks/use-coming-products-by-year-option"
+import {
+	useGetFinancesByDateQuery,
+	type FinancePriceType,
+	type FinanceType, type FinanceUrl, FinanceDate
+} from "src/services/finances"
+import {
+	useFinancesByDateOption
+} from "src/components/screens/finances/hooks/use-finances-by-date-option"
 
-const ComingProductsByYearChart: FC = () => {
-	const [year, setYear] = useState(dayjs())
-	const [type, setType] = useState<FinanceType>("amount")
+interface FinancesByDateChartProps {
+	url: FinanceUrl
+	type: FinanceDate
+}
+
+const FinancesByDateChart: FC<FinancesByDateChartProps> = ({ url, type }) => {
+	const [date, setDate] = useState(dayjs())
+	const [valueType, setValueType] = useState<FinanceType>("amount")
 	const [priceType, setPriceType] = useState<FinancePriceType>("uzs")
-
+	
 	const {
 		data: comingProductsByYear,
 		isLoading,
 		isFetching
-	} = useGetComingProductsByDateQuery("year", {
-		type,
-		year: year.format("YYYY"),
+	} = useGetFinancesByDateQuery(url, type, {
+		type: valueType,
+		year: date.format("YYYY"),
+		month: date.format("M"),
 		price_type: priceType
 	})
-
-	const option = useComingProductsByYearOption({
-		data: comingProductsByYear?.data,
+	
+	const option = useFinancesByDateOption({
 		type,
-		priceType
+		valueType,
+		priceType,
+		data: comingProductsByYear?.data,
 	})
 	return (
 		<Card
@@ -44,9 +56,9 @@ const ComingProductsByYearChart: FC = () => {
 							format: "YYYY",
 							type: "mask"
 						}}
-						onToday={() => setYear(dayjs())}
-						value={year}
-						onChange={setYear}
+						onToday={() => setDate(dayjs())}
+						value={date}
+						onChange={setDate}
 					/>
 					<Popover
 						placement={"bottomRight"}
@@ -54,7 +66,7 @@ const ComingProductsByYearChart: FC = () => {
 						content={
 							<Space direction={"vertical"}>
 								<Segmented<FinanceType>
-									onChange={setType}
+									onChange={setValueType}
 									options={financeTypesData}
 								/>
 								<Segmented<FinancePriceType>
@@ -76,4 +88,4 @@ const ComingProductsByYearChart: FC = () => {
 	)
 }
 
-export { ComingProductsByYearChart }
+export { FinancesByDateChart }

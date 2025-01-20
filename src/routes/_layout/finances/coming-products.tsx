@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Col, Row } from "antd"
-import { ComingProductsByYearChart } from "src/components/screens/coming-products"
+import { FinancesByDateChart } from "src/components/screens/finances"
 
 export const Route = createFileRoute("/_layout/finances/coming-products")({
 	component: RouteComponent
@@ -11,7 +11,13 @@ function RouteComponent() {
 		<>
 			<Row gutter={20} style={{ rowGap: 20 }}>
 				<Col span={8}>
-					<ComingProductsByYearChart />
+					<FinancesByDateChart url={"products"} type={"year"} />
+				</Col>
+				<Col span={16}>
+					<FinancesByDateChart url={"products"} type={"month"} />
+				</Col>
+				<Col span={24}>
+					<FinancesByDateChart url={"products"} type={"days"} />
 				</Col>
 			</Row>
 		</>

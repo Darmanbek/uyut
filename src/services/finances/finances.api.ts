@@ -1,16 +1,18 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { useMessage } from "src/hooks/use-message"
-import type { FinanceDate, GetParams, ResponseError } from "src/services/shared"
-import { comingProductsService } from "./coming-products.service"
+import type { GetParams, ResponseError } from "src/services/shared"
+import { financesService } from "./finances.service"
+import { FinanceDate, FinanceUrl } from "./finances.types"
 
-const useGetComingProductsByDateQuery = (
+const useGetFinancesByDateQuery = (
+	url: FinanceUrl,
 	type: FinanceDate,
 	params: GetParams
 ) => {
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => comingProductsService.getByDate(type, params),
-		queryKey: ["products", `by-${type}`, ...Object.values(params)],
+		queryFn: () => financesService.getByDate(url, type, params),
+		queryKey: [url, `by-${type}`, ...Object.values(params)],
 		placeholderData: keepPreviousData,
 		throwOnError: (error: ResponseError) => {
 			message.error({
@@ -22,11 +24,11 @@ const useGetComingProductsByDateQuery = (
 	})
 }
 
-const useGetComingProductsByTodayQuery = (params: GetParams) => {
+const useGetFinancesByTodayQuery = (url: FinanceUrl, params: GetParams) => {
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => comingProductsService.getByToday(params),
-		queryKey: ["products", "by-today", ...Object.values(params)],
+		queryFn: () => financesService.getByToday(url, params),
+		queryKey: [url, "by-today", ...Object.values(params)],
 		placeholderData: keepPreviousData,
 		throwOnError: (error: ResponseError) => {
 			message.error({
@@ -38,4 +40,4 @@ const useGetComingProductsByTodayQuery = (params: GetParams) => {
 	})
 }
 
-export { useGetComingProductsByDateQuery, useGetComingProductsByTodayQuery }
+export { useGetFinancesByDateQuery, useGetFinancesByTodayQuery }

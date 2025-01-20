@@ -1,60 +1,54 @@
 import { theme } from "antd"
 import { EChartsOption } from "echarts"
-import { financeTypesData } from "src/constants/data.constants"
+import { financePriceTypesData, financeTypesData } from "src/constants/data.constants"
 import {
-	FinanceByDate,
+	FinanceByDate, FinanceDate,
 	FinancePriceType,
 	FinanceType
-} from "src/services/shared"
+} from "src/services/finances"
 import {
-	formatEmpty,
-	formatPrice,
-	formatPriceUSD,
-	formatPriceUZS
+	formatPrice
 } from "src/utils/formatter.utils"
 
 interface ComingProductsByYearOptionProps {
 	data?: FinanceByDate[]
-	type?: FinanceType
+	type?: FinanceDate
+	valueType?: FinanceType
 	priceType?: FinancePriceType
 }
 
-const useComingProductsByYearOption = ({
+const useFinancesByDateOption = ({
 	data,
 	type,
+	valueType,
 	priceType
 }: ComingProductsByYearOptionProps) => {
 	const { token } = theme.useToken()
-
+	
 	const title =
 		financeTypesData.find((el) => el.value === type)?.label || "Общая сумма"
-	const customFormatPrice =
-		type === "count"
-			? formatEmpty
-			: priceType === "usd"
-				? formatPriceUSD
-				: formatPriceUZS
-
+	const currency = valueType === "amount" ? financePriceTypesData.find(el => el.value === priceType)?.label || "" : ""
+	
 	const categories = data?.map((el) => el.date) || []
-
-	const seriesData: EChartsOption["series"] =
-		data?.map((el) => ({
-			name: title,
-			type: "bar",
-			barWidth: "50%",
-			itemStyle: {
-				borderRadius: [token.borderRadius, token.borderRadius, 0, 0]
-			},
-			label: {
-				show: true,
-				formatter: (params) => formatPrice(params.value).toString(),
-				position: "inside",
-				color: token.colorTextLightSolid,
-				fontSize: token.fontSize
-			},
-			data: [el.total]
-		})) || []
-
+	
+	const seriesData: EChartsOption["series"] = {
+		name: title,
+		type: "bar",
+		barWidth: "50%",
+		itemStyle: {
+			borderRadius: [token.borderRadius, token.borderRadius, 0, 0]
+		},
+		label: {
+			show: type === "year",
+			formatter: (params) => `${formatPrice(params.value)} ${currency}`,
+			position: "inside",
+			color: token.colorTextLightSolid,
+			fontSize: token.fontSize
+		},
+		data: data?.map((el) => (el.total)) || []
+	}
+	
+	
 	const option: EChartsOption = {
 		tooltip: {
 			trigger: "axis",
@@ -66,13 +60,13 @@ const useComingProductsByYearOption = ({
 			textStyle: {
 				color: token.colorText
 			},
-			valueFormatter: (value) => customFormatPrice(value).toString()
+			valueFormatter: (value) => formatPrice(value).toString()
 		},
 		grid: {
-			left: "0",
+			left: "3%",
 			right: "4%",
 			bottom: "3%",
-			top: "3%",
+			top: "0",
 			containLabel: true
 		},
 		xAxis: {
@@ -101,4 +95,4 @@ const useComingProductsByYearOption = ({
 	return option
 }
 
-export { useComingProductsByYearOption }
+export { useFinancesByDateOption }
