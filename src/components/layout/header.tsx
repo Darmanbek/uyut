@@ -1,5 +1,6 @@
 import { MenuOutlined } from "@ant-design/icons"
 import { Button, Flex, Layout, Space, theme } from "antd"
+import { useResponsive } from "antd-style"
 import { type FC, PropsWithChildren } from "react"
 import { Logo } from "src/components/shared/logo"
 import { useMenuStore } from "src/store/use-menu-store"
@@ -8,7 +9,7 @@ import { ThemeButton } from "./header/theme-button"
 
 const Header: FC<PropsWithChildren> = () => {
 	const toggleCollapsed = useMenuStore((state) => state.toggleCollapsed)
-
+	const { xl } = useResponsive()
 	const {
 		token: { colorBgContainer, boxShadowSecondary, paddingLG }
 	} = theme.useToken()
@@ -25,7 +26,7 @@ const Header: FC<PropsWithChildren> = () => {
 				<Flex
 					align={"center"}
 					style={{
-						flexBasis: 270,
+						flexBasis: xl ? 270 : "auto",
 						paddingLeft: paddingLG,
 						paddingRight: paddingLG
 					}}>

@@ -17,11 +17,15 @@ import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutUsersImport } from './routes/_layout/users'
 import { Route as LayoutDashboardImport } from './routes/_layout/dashboard'
 import { Route as LayoutStoreIndexImport } from './routes/_layout/store/index'
+import { Route as LayoutSettingsIndexImport } from './routes/_layout/settings/index'
 import { Route as LayoutSalesIndexImport } from './routes/_layout/sales/index'
 import { Route as LayoutReportsIndexImport } from './routes/_layout/reports/index'
 import { Route as LayoutFinancesIndexImport } from './routes/_layout/finances/index'
 import { Route as LayoutExpensesIndexImport } from './routes/_layout/expenses/index'
 import { Route as LayoutEmployeesIndexImport } from './routes/_layout/employees/index'
+import { Route as LayoutSettingsPrintTypesImport } from './routes/_layout/settings/print-types'
+import { Route as LayoutSettingsPaymentTypesImport } from './routes/_layout/settings/payment-types'
+import { Route as LayoutSettingsExpenseTypesImport } from './routes/_layout/settings/expense-types'
 import { Route as LayoutSalesProductsImport } from './routes/_layout/sales/products'
 import { Route as LayoutReportsWriteOffProductsImport } from './routes/_layout/reports/write-off-products'
 import { Route as LayoutReportsSuppliersImport } from './routes/_layout/reports/suppliers'
@@ -77,6 +81,12 @@ const LayoutStoreIndexRoute = LayoutStoreIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutSettingsIndexRoute = LayoutSettingsIndexImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 const LayoutSalesIndexRoute = LayoutSalesIndexImport.update({
   id: '/sales/',
   path: '/sales/',
@@ -106,6 +116,28 @@ const LayoutEmployeesIndexRoute = LayoutEmployeesIndexImport.update({
   path: '/employees/',
   getParentRoute: () => LayoutRoute,
 } as any)
+
+const LayoutSettingsPrintTypesRoute = LayoutSettingsPrintTypesImport.update({
+  id: '/settings/print-types',
+  path: '/settings/print-types',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutSettingsPaymentTypesRoute = LayoutSettingsPaymentTypesImport.update(
+  {
+    id: '/settings/payment-types',
+    path: '/settings/payment-types',
+    getParentRoute: () => LayoutRoute,
+  } as any,
+)
+
+const LayoutSettingsExpenseTypesRoute = LayoutSettingsExpenseTypesImport.update(
+  {
+    id: '/settings/expense-types',
+    path: '/settings/expense-types',
+    getParentRoute: () => LayoutRoute,
+  } as any,
+)
 
 const LayoutSalesProductsRoute = LayoutSalesProductsImport.update({
   id: '/sales/products',
@@ -349,6 +381,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutSalesProductsImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/settings/expense-types': {
+      id: '/_layout/settings/expense-types'
+      path: '/settings/expense-types'
+      fullPath: '/settings/expense-types'
+      preLoaderRoute: typeof LayoutSettingsExpenseTypesImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/settings/payment-types': {
+      id: '/_layout/settings/payment-types'
+      path: '/settings/payment-types'
+      fullPath: '/settings/payment-types'
+      preLoaderRoute: typeof LayoutSettingsPaymentTypesImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/settings/print-types': {
+      id: '/_layout/settings/print-types'
+      path: '/settings/print-types'
+      fullPath: '/settings/print-types'
+      preLoaderRoute: typeof LayoutSettingsPrintTypesImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/employees/': {
       id: '/_layout/employees/'
       path: '/employees'
@@ -382,6 +435,13 @@ declare module '@tanstack/react-router' {
       path: '/sales'
       fullPath: '/sales'
       preLoaderRoute: typeof LayoutSalesIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/settings/': {
+      id: '/_layout/settings/'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof LayoutSettingsIndexImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/store/': {
@@ -441,11 +501,15 @@ interface LayoutRouteChildren {
   LayoutReportsSuppliersRoute: typeof LayoutReportsSuppliersRoute
   LayoutReportsWriteOffProductsRoute: typeof LayoutReportsWriteOffProductsRoute
   LayoutSalesProductsRoute: typeof LayoutSalesProductsRoute
+  LayoutSettingsExpenseTypesRoute: typeof LayoutSettingsExpenseTypesRoute
+  LayoutSettingsPaymentTypesRoute: typeof LayoutSettingsPaymentTypesRoute
+  LayoutSettingsPrintTypesRoute: typeof LayoutSettingsPrintTypesRoute
   LayoutEmployeesIndexRoute: typeof LayoutEmployeesIndexRoute
   LayoutExpensesIndexRoute: typeof LayoutExpensesIndexRoute
   LayoutFinancesIndexRoute: typeof LayoutFinancesIndexRoute
   LayoutReportsIndexRoute: typeof LayoutReportsIndexRoute
   LayoutSalesIndexRoute: typeof LayoutSalesIndexRoute
+  LayoutSettingsIndexRoute: typeof LayoutSettingsIndexRoute
   LayoutStoreIndexRoute: typeof LayoutStoreIndexRoute
   LayoutReportsProductsIdRoute: typeof LayoutReportsProductsIdRoute
   LayoutStoreProductsIdRoute: typeof LayoutStoreProductsIdRoute
@@ -470,11 +534,15 @@ const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutReportsSuppliersRoute: LayoutReportsSuppliersRoute,
   LayoutReportsWriteOffProductsRoute: LayoutReportsWriteOffProductsRoute,
   LayoutSalesProductsRoute: LayoutSalesProductsRoute,
+  LayoutSettingsExpenseTypesRoute: LayoutSettingsExpenseTypesRoute,
+  LayoutSettingsPaymentTypesRoute: LayoutSettingsPaymentTypesRoute,
+  LayoutSettingsPrintTypesRoute: LayoutSettingsPrintTypesRoute,
   LayoutEmployeesIndexRoute: LayoutEmployeesIndexRoute,
   LayoutExpensesIndexRoute: LayoutExpensesIndexRoute,
   LayoutFinancesIndexRoute: LayoutFinancesIndexRoute,
   LayoutReportsIndexRoute: LayoutReportsIndexRoute,
   LayoutSalesIndexRoute: LayoutSalesIndexRoute,
+  LayoutSettingsIndexRoute: LayoutSettingsIndexRoute,
   LayoutStoreIndexRoute: LayoutStoreIndexRoute,
   LayoutReportsProductsIdRoute: LayoutReportsProductsIdRoute,
   LayoutStoreProductsIdRoute: LayoutStoreProductsIdRoute,
@@ -504,11 +572,15 @@ export interface FileRoutesByFullPath {
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/sales/products': typeof LayoutSalesProductsRoute
+  '/settings/expense-types': typeof LayoutSettingsExpenseTypesRoute
+  '/settings/payment-types': typeof LayoutSettingsPaymentTypesRoute
+  '/settings/print-types': typeof LayoutSettingsPrintTypesRoute
   '/employees': typeof LayoutEmployeesIndexRoute
   '/expenses': typeof LayoutExpensesIndexRoute
   '/finances': typeof LayoutFinancesIndexRoute
   '/reports': typeof LayoutReportsIndexRoute
   '/sales': typeof LayoutSalesIndexRoute
+  '/settings': typeof LayoutSettingsIndexRoute
   '/store': typeof LayoutStoreIndexRoute
   '/reports/products/$id': typeof LayoutReportsProductsIdRoute
   '/store/products/$id': typeof LayoutStoreProductsIdRoute
@@ -534,11 +606,15 @@ export interface FileRoutesByTo {
   '/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/sales/products': typeof LayoutSalesProductsRoute
+  '/settings/expense-types': typeof LayoutSettingsExpenseTypesRoute
+  '/settings/payment-types': typeof LayoutSettingsPaymentTypesRoute
+  '/settings/print-types': typeof LayoutSettingsPrintTypesRoute
   '/employees': typeof LayoutEmployeesIndexRoute
   '/expenses': typeof LayoutExpensesIndexRoute
   '/finances': typeof LayoutFinancesIndexRoute
   '/reports': typeof LayoutReportsIndexRoute
   '/sales': typeof LayoutSalesIndexRoute
+  '/settings': typeof LayoutSettingsIndexRoute
   '/store': typeof LayoutStoreIndexRoute
   '/reports/products/$id': typeof LayoutReportsProductsIdRoute
   '/store/products/$id': typeof LayoutStoreProductsIdRoute
@@ -566,11 +642,15 @@ export interface FileRoutesById {
   '/_layout/reports/suppliers': typeof LayoutReportsSuppliersRoute
   '/_layout/reports/write-off-products': typeof LayoutReportsWriteOffProductsRoute
   '/_layout/sales/products': typeof LayoutSalesProductsRoute
+  '/_layout/settings/expense-types': typeof LayoutSettingsExpenseTypesRoute
+  '/_layout/settings/payment-types': typeof LayoutSettingsPaymentTypesRoute
+  '/_layout/settings/print-types': typeof LayoutSettingsPrintTypesRoute
   '/_layout/employees/': typeof LayoutEmployeesIndexRoute
   '/_layout/expenses/': typeof LayoutExpensesIndexRoute
   '/_layout/finances/': typeof LayoutFinancesIndexRoute
   '/_layout/reports/': typeof LayoutReportsIndexRoute
   '/_layout/sales/': typeof LayoutSalesIndexRoute
+  '/_layout/settings/': typeof LayoutSettingsIndexRoute
   '/_layout/store/': typeof LayoutStoreIndexRoute
   '/_layout/reports/products/$id': typeof LayoutReportsProductsIdRoute
   '/_layout/store/products/$id': typeof LayoutStoreProductsIdRoute
@@ -599,11 +679,15 @@ export interface FileRouteTypes {
     | '/reports/suppliers'
     | '/reports/write-off-products'
     | '/sales/products'
+    | '/settings/expense-types'
+    | '/settings/payment-types'
+    | '/settings/print-types'
     | '/employees'
     | '/expenses'
     | '/finances'
     | '/reports'
     | '/sales'
+    | '/settings'
     | '/store'
     | '/reports/products/$id'
     | '/store/products/$id'
@@ -628,11 +712,15 @@ export interface FileRouteTypes {
     | '/reports/suppliers'
     | '/reports/write-off-products'
     | '/sales/products'
+    | '/settings/expense-types'
+    | '/settings/payment-types'
+    | '/settings/print-types'
     | '/employees'
     | '/expenses'
     | '/finances'
     | '/reports'
     | '/sales'
+    | '/settings'
     | '/store'
     | '/reports/products/$id'
     | '/store/products/$id'
@@ -658,11 +746,15 @@ export interface FileRouteTypes {
     | '/_layout/reports/suppliers'
     | '/_layout/reports/write-off-products'
     | '/_layout/sales/products'
+    | '/_layout/settings/expense-types'
+    | '/_layout/settings/payment-types'
+    | '/_layout/settings/print-types'
     | '/_layout/employees/'
     | '/_layout/expenses/'
     | '/_layout/finances/'
     | '/_layout/reports/'
     | '/_layout/sales/'
+    | '/_layout/settings/'
     | '/_layout/store/'
     | '/_layout/reports/products/$id'
     | '/_layout/store/products/$id'
@@ -714,11 +806,15 @@ export const routeTree = rootRoute
         "/_layout/reports/suppliers",
         "/_layout/reports/write-off-products",
         "/_layout/sales/products",
+        "/_layout/settings/expense-types",
+        "/_layout/settings/payment-types",
+        "/_layout/settings/print-types",
         "/_layout/employees/",
         "/_layout/expenses/",
         "/_layout/finances/",
         "/_layout/reports/",
         "/_layout/sales/",
+        "/_layout/settings/",
         "/_layout/store/",
         "/_layout/reports/products/$id",
         "/_layout/store/products/$id",
@@ -793,6 +889,18 @@ export const routeTree = rootRoute
       "filePath": "_layout/sales/products.tsx",
       "parent": "/_layout"
     },
+    "/_layout/settings/expense-types": {
+      "filePath": "_layout/settings/expense-types.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/settings/payment-types": {
+      "filePath": "_layout/settings/payment-types.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/settings/print-types": {
+      "filePath": "_layout/settings/print-types.tsx",
+      "parent": "/_layout"
+    },
     "/_layout/employees/": {
       "filePath": "_layout/employees/index.tsx",
       "parent": "/_layout"
@@ -811,6 +919,10 @@ export const routeTree = rootRoute
     },
     "/_layout/sales/": {
       "filePath": "_layout/sales/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/settings/": {
+      "filePath": "_layout/settings/index.tsx",
       "parent": "/_layout"
     },
     "/_layout/store/": {

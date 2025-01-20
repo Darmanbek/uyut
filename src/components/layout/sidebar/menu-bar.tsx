@@ -1,5 +1,6 @@
 import { useLocation, useRouter } from "@tanstack/react-router"
 import { ConfigProvider, Menu, theme } from "antd"
+import { useResponsive } from "antd-style"
 import { type FC } from "react"
 import { useMenuStore } from "src/store/use-menu-store"
 import { useThemeStore } from "src/store/use-theme-store"
@@ -10,6 +11,7 @@ const MenuBar: FC = () => {
 	const { theme: mode } = useThemeStore()
 	const { collapsed } = useMenuStore()
 	const { pathname } = useLocation()
+	const { xl } = useResponsive()
 
 	const onSelectMenu = (key: string) => {
 		router.navigate({
@@ -38,7 +40,9 @@ const MenuBar: FC = () => {
 						borderRight: 0,
 						background: token.colorBgContainer
 					}}
-					items={menu?.filter((el) => (collapsed ? el?.type !== "group" : el))}
+					items={menu?.filter((el) =>
+						collapsed && xl ? el?.type !== "group" : el
+					)}
 				/>
 			</ConfigProvider>
 		</>

@@ -1,14 +1,14 @@
 import { api } from "src/api"
 import type {
-	
 	GetParams,
-	ResponseData
+	ResponseData,
+	ResponseSingleData
 } from "src/services/shared"
 import type {
 	FinanceByDate,
 	FinanceByToday,
 	FinanceDate,
-	FinanceUrl,
+	FinanceUrl
 } from "./finances.types"
 
 class FinancesService {
@@ -20,11 +20,11 @@ class FinancesService {
 		const response = await api.get(`/${url}-by-${type}`, { params })
 		return response.data
 	}
-	
+
 	getByToday = async (
 		url: FinanceUrl,
 		params: GetParams
-	): Promise<ResponseData<FinanceByToday>> => {
+	): Promise<ResponseSingleData<FinanceByToday>> => {
 		const response = await api.get(`/${url}-by-today`, { params })
 		return response.data
 	}

@@ -3,4 +3,9 @@ type PaymentType = {
 	name: string
 }
 
-export type { PaymentType }
+type PaymentTypeForm = {
+	id?: number
+	name: string
+}
+
+export type { PaymentType, PaymentTypeForm }

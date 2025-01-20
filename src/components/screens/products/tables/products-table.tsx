@@ -3,6 +3,7 @@ import { FC } from "react"
 import { Button } from "src/components/ui/button"
 import { Table } from "src/components/ui/table"
 import { type Product, useGetProductsQuery } from "src/services/products"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useProductsColumns } from "../hooks/use-products-columns"
 
 interface ProductsTableProps {
@@ -19,6 +20,8 @@ const ProductsTable: FC<ProductsTableProps> = ({ readonly }) => {
 		limit: 10
 	})
 
+	const toggleForm = useFormDevtoolsStore((state) => state.toggleForm)
+
 	const columns = useProductsColumns()
 	return (
 		<>
@@ -27,7 +30,7 @@ const ProductsTable: FC<ProductsTableProps> = ({ readonly }) => {
 				title={"Товары"}
 				extra={
 					readonly ? null : (
-						<Button type={"primary"} icon={<PlusOutlined />}>
+						<Button icon={<PlusOutlined />} onClick={toggleForm}>
 							Добавить
 						</Button>
 					)

@@ -1,7 +1,7 @@
 import { api } from "src/api"
 import type { GetParams, ParamId } from "../params.types"
 import type { Response, ResponseSingleData } from "../response.types"
-import type { PrintType } from "./print-types.types"
+import type { PrintType, PrintTypeForm } from "./print-types.types"
 
 class PrintTypesService {
 	get = async (params: GetParams): Promise<Response<PrintType>> => {
@@ -15,20 +15,20 @@ class PrintTypesService {
 	}
 
 	create = async (
-		form: Record<string, unknown>
+		form: PrintTypeForm
 	): Promise<ResponseSingleData<PrintType>> => {
 		const response = await api.post(`/print-types`, form)
 		return response.data
 	}
 
 	edit = async (
-		form: Record<string, unknown>
+		form: PrintTypeForm
 	): Promise<ResponseSingleData<PrintType>> => {
 		const response = await api.put(`/print-types/${form.id}`, form)
 		return response.data
 	}
 
-	delete = async (id: unknown): Promise<ResponseSingleData<PrintType>> => {
+	delete = async (id: ParamId): Promise<ResponseSingleData<PrintType>> => {
 		const response = await api.delete(`/print-types/${id}`)
 		return response.data
 	}

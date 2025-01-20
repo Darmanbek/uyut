@@ -4,6 +4,7 @@ import dayjs from "dayjs"
 import dayjsEN from "dayjs/locale/en"
 // import dayjsUZ from "dayjs/locale/uz-latn"
 import dayjsRU from "dayjs/locale/ru"
+import dayLocaleData from "dayjs/plugin/localeData"
 import { type FC, type PropsWithChildren } from "react"
 import { DARK_COLORS, LIGHT_COLORS } from "src/constants/colors.constants"
 import { useThemeStore } from "src/store/use-theme-store"
@@ -17,6 +18,10 @@ dayjs.locale("en", {
 	...dayjsEN,
 	ordinal: dayjsEN.ordinal
 })
+
+dayjs.extend(dayLocaleData)
+
+dayjs.locale("ru")
 
 // dayjs.locale("uz", {
 // 	...dayjsUZ,

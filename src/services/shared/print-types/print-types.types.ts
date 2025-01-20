@@ -3,4 +3,9 @@ type PrintType = {
 	name: string
 }
 
-export type { PrintType }
+type PrintTypeForm = {
+	id?: number
+	name: string
+}
+
+export type { PrintType, PrintTypeForm }

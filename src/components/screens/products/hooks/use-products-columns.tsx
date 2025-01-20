@@ -78,6 +78,7 @@ export const useProductsColumns = () => {
 			render: formatDate
 		},
 		{
+			fixed: "right",
 			width: 50,
 			title: "",
 			key: "actions",

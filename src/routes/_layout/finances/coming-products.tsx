@@ -1,23 +1,39 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Col, Row } from "antd"
-import { FinancesByDateChart } from "src/components/screens/finances"
+import {
+	FinancesByDateChart,
+	FinancesByTodayStatistic
+} from "src/components/screens/finances"
 
 export const Route = createFileRoute("/_layout/finances/coming-products")({
-	component: RouteComponent
+	component: ComingProductsComponent
 })
 
-function RouteComponent() {
+function ComingProductsComponent() {
 	return (
 		<>
+			<FinancesByTodayStatistic url={"products"} />
 			<Row gutter={20} style={{ rowGap: 20 }}>
-				<Col span={8}>
-					<FinancesByDateChart url={"products"} type={"year"} />
+				<Col xs={24} md={8}>
+					<FinancesByDateChart
+						title={"Приходы по годам"}
+						url={"products"}
+						type={"year"}
+					/>
 				</Col>
-				<Col span={16}>
-					<FinancesByDateChart url={"products"} type={"month"} />
+				<Col xs={24} md={16}>
+					<FinancesByDateChart
+						title={"Приходы по месяцам"}
+						url={"products"}
+						type={"month"}
+					/>
 				</Col>
 				<Col span={24}>
-					<FinancesByDateChart url={"products"} type={"days"} />
+					<FinancesByDateChart
+						title={"Приходы по дням"}
+						url={"products"}
+						type={"days"}
+					/>
 				</Col>
 			</Row>
 		</>

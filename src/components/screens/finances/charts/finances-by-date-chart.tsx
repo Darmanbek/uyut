@@ -1,8 +1,9 @@
-import { MoreOutlined } from "@ant-design/icons"
+import { SettingFilled } from "@ant-design/icons"
 import { Card, Popover, Segmented, Space, Spin } from "antd"
 import dayjs from "dayjs"
 import EChartsReact from "echarts-for-react"
 import { type FC, useState } from "react"
+import { useFinancesByDateOption } from "src/components/screens/finances/hooks/use-finances-by-date-option"
 import { Button } from "src/components/ui/button"
 import { DatePicker } from "src/components/ui/date-picker"
 import {
@@ -10,24 +11,30 @@ import {
 	financeTypesData
 } from "src/constants/data.constants"
 import {
-	useGetFinancesByDateQuery,
+	FinanceDate,
 	type FinancePriceType,
-	type FinanceType, type FinanceUrl, FinanceDate
+	type FinanceType,
+	type FinanceUrl,
+	useGetFinancesByDateQuery
 } from "src/services/finances"
-import {
-	useFinancesByDateOption
-} from "src/components/screens/finances/hooks/use-finances-by-date-option"
 
 interface FinancesByDateChartProps {
+	title: string
 	url: FinanceUrl
 	type: FinanceDate
+	onlyUZS?: boolean
 }
 
-const FinancesByDateChart: FC<FinancesByDateChartProps> = ({ url, type }) => {
+const FinancesByDateChart: FC<FinancesByDateChartProps> = ({
+	title,
+	url,
+	type,
+	onlyUZS
+}) => {
 	const [date, setDate] = useState(dayjs())
 	const [valueType, setValueType] = useState<FinanceType>("amount")
 	const [priceType, setPriceType] = useState<FinancePriceType>("uzs")
-	
+
 	const {
 		data: comingProductsByYear,
 		isLoading,
@@ -38,26 +45,28 @@ const FinancesByDateChart: FC<FinancesByDateChartProps> = ({ url, type }) => {
 		month: date.format("M"),
 		price_type: priceType
 	})
-	
+
 	const option = useFinancesByDateOption({
 		type,
 		valueType,
 		priceType,
-		data: comingProductsByYear?.data,
+		data: comingProductsByYear?.data
 	})
 	return (
 		<Card
-			title={"Приходы за год"}
+			bordered={false}
+			title={title}
 			extra={
 				<Space>
 					<DatePicker
-						picker={"year"}
+						picker={type === "days" ? "month" : "year"}
 						format={{
-							format: "YYYY",
+							format: type === "days" ? "MM.YYYY" : "YYYY",
 							type: "mask"
 						}}
 						onToday={() => setDate(dayjs())}
 						value={date}
+						allowClear={false}
 						onChange={setDate}
 					/>
 					<Popover
@@ -70,6 +79,7 @@ const FinancesByDateChart: FC<FinancesByDateChartProps> = ({ url, type }) => {
 									options={financeTypesData}
 								/>
 								<Segmented<FinancePriceType>
+									hidden={valueType === "count" || onlyUZS}
 									block={true}
 									value={priceType}
 									onChange={setPriceType}
@@ -77,12 +87,12 @@ const FinancesByDateChart: FC<FinancesByDateChartProps> = ({ url, type }) => {
 								/>
 							</Space>
 						}>
-						<Button icon={<MoreOutlined />} />
+						<Button tooltip={"Фильтры"} icon={<SettingFilled />} />
 					</Popover>
 				</Space>
 			}>
 			<Spin spinning={isLoading || isFetching}>
-				<EChartsReact style={{ minWidth: 0 }} option={option} />
+				<EChartsReact option={option} />
 			</Spin>
 		</Card>
 	)

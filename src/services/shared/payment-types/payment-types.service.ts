@@ -1,7 +1,7 @@
 import { api } from "src/api"
 import { GetParams, ParamId } from "../params.types"
 import { Response, ResponseSingleData } from "../response.types"
-import { PaymentType } from "./payment-types.types"
+import { PaymentType, PaymentTypeForm } from "./payment-types.types"
 
 class PaymentTypesService {
 	get = async (params: GetParams): Promise<Response<PaymentType>> => {
@@ -15,20 +15,20 @@ class PaymentTypesService {
 	}
 
 	create = async (
-		form: Record<string, unknown>
+		form: PaymentTypeForm
 	): Promise<ResponseSingleData<PaymentType>> => {
 		const response = await api.post(`/payment-types`, form)
 		return response.data
 	}
 
 	edit = async (
-		form: Record<string, unknown>
+		form: PaymentTypeForm
 	): Promise<ResponseSingleData<PaymentType>> => {
 		const response = await api.put(`/payment-types/${form.id}`, form)
 		return response.data
 	}
 
-	delete = async (id: unknown): Promise<ResponseSingleData<void>> => {
+	delete = async (id: ParamId): Promise<ResponseSingleData<void>> => {
 		const response = await api.delete(`/payment-types/${id}`)
 		return response.data
 	}

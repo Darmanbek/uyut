@@ -3,4 +3,9 @@ type ExpenseType = {
 	name: string
 }
 
-export type { ExpenseType }
+type ExpenseTypeForm = {
+	id?: number
+	name: string
+}
+
+export type { ExpenseType, ExpenseTypeForm }

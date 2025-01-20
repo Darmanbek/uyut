@@ -1,4 +1,4 @@
-import { FinancePriceType, FinanceType } from "src/services/shared"
+import type { FinancePriceType, FinanceType } from "src/services/finances"
 
 type FinanceTypesData = {
 	label: string
@@ -32,4 +32,9 @@ const financePriceTypesData: FinancePriceTypesData[] = [
 	}
 ]
 
-export { financeTypesData, financePriceTypesData }
+export {
+	financeTypesData,
+	financePriceTypesData,
+	type FinancePriceTypesData,
+	type FinanceTypesData
+}
