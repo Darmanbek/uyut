@@ -35,5 +35,5 @@ export const useConvertPrice = (
 
 	const converted = Number(price) / Number(rate)
 
-	return `${converted.toFixed(2)}`
+	return converted.toFixed(2)
 }

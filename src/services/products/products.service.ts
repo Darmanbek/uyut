@@ -25,7 +25,7 @@ class ProductsService {
 		return response.data
 	}
 	create = async (form: ProductForm): Promise<ResponseData<PrintDetail>> => {
-		const response = await api.post(`/products/`, form)
+		const response = await api.post(`/products`, form)
 		return response.data
 	}
 	createPrintDetailById = async (
