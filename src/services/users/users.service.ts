@@ -1,11 +1,11 @@
 import { api } from "src/api"
-import {
+import type {
 	GetParams,
 	ParamId,
 	Response,
 	ResponseSingleData
 } from "src/services/shared"
-import { User } from "./users.types"
+import type { User, UserForm } from "./users.types"
 
 class UsersService {
 	get = async (params: GetParams): Promise<Response<User>> => {
@@ -18,16 +18,12 @@ class UsersService {
 		return response.data
 	}
 
-	create = async (
-		form: Record<string, unknown>
-	): Promise<ResponseSingleData<User>> => {
+	create = async (form: UserForm): Promise<ResponseSingleData<User>> => {
 		const response = await api.post(`/admins`, form)
 		return response.data
 	}
 
-	edit = async (
-		form: Record<string, unknown>
-	): Promise<ResponseSingleData<User>> => {
+	edit = async (form: UserForm): Promise<ResponseSingleData<User>> => {
 		const response = await api.put(`/admins/${form.id}`, form)
 		return response.data
 	}

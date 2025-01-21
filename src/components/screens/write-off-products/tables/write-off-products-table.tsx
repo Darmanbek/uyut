@@ -8,7 +8,13 @@ import {
 } from "src/services/write-off-products"
 import { useWriteOffProductsColumns } from "../hooks/use-write-off-products-columns"
 
-const WriteOffProductsTable: FC = () => {
+interface WriteOffProductsTableProps {
+	readonly?: boolean
+}
+
+const WriteOffProductsTable: FC<WriteOffProductsTableProps> = ({
+	readonly
+}) => {
 	const {
 		data: writeOffProducts,
 		isLoading,
@@ -23,8 +29,10 @@ const WriteOffProductsTable: FC = () => {
 		<>
 			<Table<WriteOffProduct>
 				title={"Списания товаров"}
-				extra={<Button icon={<PlusOutlined />}>Добавить</Button>}
-				columns={columns}
+				extra={
+					readonly ? null : <Button icon={<PlusOutlined />}>Добавить</Button>
+				}
+				columns={columns.filter((el) => (readonly ? el.key !== "actions" : el))}
 				loading={isLoading || isFetching}
 				dataSource={writeOffProducts?.data}
 				pagination={{

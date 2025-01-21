@@ -41,7 +41,7 @@ const ProductsForm: FC = () => {
 	}, [form, params])
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
-			<Form {...FORM_DEFAULT} form={form} onFinish={onFinish}>
+			<Form {...FORM_DEFAULT} name={"product-form"} form={form} onFinish={onFinish}>
 				<Form.Item<ProductForm>
 					name={"name"}
 					label={"Название"}

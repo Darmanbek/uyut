@@ -7,16 +7,19 @@ import {
 	useGetSalesProductsQuery
 } from "src/services/sales-products"
 import { GetParams } from "src/services/shared"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useSalesProductsColumns } from "../hooks/use-sales-products-columns"
 
 interface SalesProductsTableProps {
 	params: GetParams
 	onChangeParams: (params: GetParams) => void
+	readonly?: boolean
 }
 
 const SalesProductsTable: FC<SalesProductsTableProps> = ({
 	params,
-	onChangeParams
+	onChangeParams,
+	readonly
 }) => {
 	const { page, limit } = params
 
@@ -29,14 +32,22 @@ const SalesProductsTable: FC<SalesProductsTableProps> = ({
 		limit: limit || 10
 	})
 
+	const toggleForm = useFormDevtoolsStore((state) => state.toggleForm)
+
 	const columns = useSalesProductsColumns()
 	return (
 		<>
 			<Table<SalesProduct>
 				rowKey={(record) => record.id}
 				title={"Проданные товары"}
-				extra={<Button icon={<PlusOutlined />}>Добавить</Button>}
-				columns={columns}
+				extra={
+					readonly ? null : (
+						<Button icon={<PlusOutlined />} onClick={toggleForm}>
+							Добавить
+						</Button>
+					)
+				}
+				columns={columns.filter((el) => (readonly ? el.key !== "actions" : el))}
 				dataSource={salesProducts?.data}
 				loading={isLoading || isFetching}
 				pagination={{

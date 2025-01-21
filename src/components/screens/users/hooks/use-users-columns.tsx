@@ -3,10 +3,15 @@ import { Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { Button } from "src/components/ui/button"
 import { Tag } from "src/components/ui/tag"
-import type { User } from "src/services/users"
+import { useDeleteUsersMutation, User } from "src/services/users"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { formatEmpty, formatPhone } from "src/utils/formatter.utils"
 
 export const useUsersColumns = () => {
+	const { mutate: deleteUser } = useDeleteUsersMutation()
+
+	const editUser = useFormDevtoolsStore((state) => state.setParams)
+
 	const columns: ColumnsType<User> = [
 		{
 			title: "ФИО",
@@ -35,10 +40,22 @@ export const useUsersColumns = () => {
 			fixed: "right",
 			title: "",
 			key: "actions",
-			render: () => (
+			render: (_v, record) => (
 				<Space>
-					<Button tooltip={"Изменить"} icon={<EditFilled />} />
-					<Button tooltip={"Удалить"} danger={true} icon={<DeleteFilled />} />
+					<Button
+						onClick={() => editUser(record)}
+						tooltip={"Изменить"}
+						icon={<EditFilled />}
+					/>
+					<Button
+						confirm={{
+							title: record?.name,
+							onConfirm: () => deleteUser(record?.id)
+						}}
+						tooltip={"Удалить"}
+						danger={true}
+						icon={<DeleteFilled />}
+					/>
 				</Space>
 			)
 		}

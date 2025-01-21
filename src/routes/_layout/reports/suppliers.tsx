@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { SuppliersStable } from "src/components/screens/suppliers"
+import {
+	SuppliersForm,
+	SuppliersStable
+} from "src/components/screens/suppliers"
 
 export const Route = createFileRoute("/_layout/reports/suppliers")({
 	component: SuppliersComponent
@@ -8,6 +11,7 @@ export const Route = createFileRoute("/_layout/reports/suppliers")({
 function SuppliersComponent() {
 	return (
 		<>
+			<SuppliersForm />
 			<SuppliersStable />
 		</>
 	)

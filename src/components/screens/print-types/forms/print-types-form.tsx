@@ -34,7 +34,7 @@ const PrintTypesForm: FC = () => {
 	}, [form, params])
 	return (
 		<FormDrawer form={form} isLoading={addLoading}>
-			<Form {...FORM_DEFAULT} form={form} onFinish={onFinish}>
+			<Form {...FORM_DEFAULT} name={"print-type-form"} form={form} onFinish={onFinish}>
 				<Form.Item<PrintTypeForm>
 					name={"name"}
 					label={"Название"}

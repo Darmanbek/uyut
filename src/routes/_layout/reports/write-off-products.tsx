@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_layout/reports/write-off-products")({
 function WriteOffProductsComponent() {
 	return (
 		<>
-			<WriteOffProductsTable />
+			<WriteOffProductsTable readonly={true} />
 		</>
 	)
 }

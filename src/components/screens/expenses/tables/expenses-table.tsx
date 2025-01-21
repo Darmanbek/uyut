@@ -3,16 +3,29 @@ import type { FC } from "react"
 import { Button } from "src/components/ui/button"
 import { Table } from "src/components/ui/table"
 import { type Expense, useGetExpensesQuery } from "src/services/expenses"
+import { GetParams } from "src/services/shared"
 import { useExpensesColumns } from "../hooks/use-expenses-columns"
 
-const ExpensesTable: FC = () => {
+interface ExpensesTableProps {
+	params: GetParams
+	onChangeParams: (params: GetParams) => void
+	readonly?: boolean
+}
+
+const ExpensesTable: FC<ExpensesTableProps> = ({
+	readonly,
+	params,
+	onChangeParams
+}) => {
+	const { page, limit } = params
+
 	const {
 		data: expenses,
 		isLoading,
 		isFetching
 	} = useGetExpensesQuery({
-		page: 1,
-		limit: 10
+		page: page || 1,
+		limit: limit || 10
 	})
 
 	const columns = useExpensesColumns()
@@ -21,12 +34,17 @@ const ExpensesTable: FC = () => {
 			<Table<Expense>
 				rowKey={(record) => record.id}
 				title={"Расходы"}
-				extra={<Button icon={<PlusOutlined />}>Добавить</Button>}
-				columns={columns}
+				extra={
+					readonly ? null : <Button icon={<PlusOutlined />}>Добавить</Button>
+				}
+				columns={columns.filter((el) => (readonly ? el.key !== "actions" : el))}
 				loading={isLoading || isFetching}
 				dataSource={expenses?.data}
 				pagination={{
-					total: expenses?.pagination?.count
+					total: expenses?.pagination?.count,
+					onChange: (page, limit) => {
+						onChangeParams({ page, limit })
+					}
 				}}
 			/>
 		</>

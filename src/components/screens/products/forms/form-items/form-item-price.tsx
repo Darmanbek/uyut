@@ -3,6 +3,7 @@ import { type FC } from "react"
 import { INPUT_PLACEHOLDER } from "src/constants/form.constants"
 // import { useConvertPrice } from "src/hooks/use-convert-price"
 import type { ProductForm } from "src/services/products"
+import { formatInputPrice } from "src/utils/formatter.utils"
 
 interface FormItemPriceProps {
 	form: FormInstance<ProductForm>
@@ -58,6 +59,7 @@ const FormItemPrice: FC<FormItemPriceProps> = () => {
 					label={"UZS"}
 					rules={[{ required: true }]}>
 					<InputNumber
+						formatter={formatInputPrice}
 						style={{ width: "100%" }}
 						placeholder={INPUT_PLACEHOLDER}
 					/>
@@ -74,6 +76,7 @@ const FormItemPrice: FC<FormItemPriceProps> = () => {
 					label={"USD"}
 					rules={[{ required: true }]}>
 					<InputNumber
+						formatter={formatInputPrice}
 						style={{ width: "100%" }}
 						placeholder={INPUT_PLACEHOLDER}
 					/>

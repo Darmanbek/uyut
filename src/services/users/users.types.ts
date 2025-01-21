@@ -7,4 +7,12 @@ type User = {
 	role: Role
 }
 
-export type { User }
+type UserForm = {
+	id?: number
+	name: string
+	phone: string
+	password: string
+	role_id: number
+}
+
+export type { User, UserForm }

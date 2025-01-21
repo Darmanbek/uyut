@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { SalesProductsTable } from "src/components/screens/sales-products"
+import { SalesProductsForm, SalesProductsTable } from "src/components/screens/sales-products"
 import { GetParams } from "src/services/shared"
 
 export const Route = createFileRoute("/_layout/sales/products")({
@@ -27,6 +27,7 @@ function ProductsComponent() {
 
 	return (
 		<>
+			<SalesProductsForm />
 			<SalesProductsTable params={params} onChangeParams={onChangeParams} />
 		</>
 	)

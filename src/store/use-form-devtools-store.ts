@@ -27,4 +27,4 @@ const useFormDevtoolsStore = create(
 	)
 )
 
-export { useFormDevtoolsStore }
+export { useFormDevtoolsStore, type ParamsForm }

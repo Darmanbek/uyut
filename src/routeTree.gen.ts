@@ -14,7 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
-import { Route as LayoutUsersImport } from './routes/_layout/users'
 import { Route as LayoutDashboardImport } from './routes/_layout/dashboard'
 import { Route as LayoutStoreIndexImport } from './routes/_layout/store/index'
 import { Route as LayoutSettingsIndexImport } from './routes/_layout/settings/index'
@@ -60,12 +59,6 @@ const LayoutRoute = LayoutImport.update({
 const LayoutIndexRoute = LayoutIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutUsersRoute = LayoutUsersImport.update({
-  id: '/users',
-  path: '/users',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -276,13 +269,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutDashboardImport
       parentRoute: typeof LayoutImport
     }
-    '/_layout/users': {
-      id: '/_layout/users'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof LayoutUsersImport
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/': {
       id: '/_layout/'
       path: '/'
@@ -486,7 +472,6 @@ declare module '@tanstack/react-router' {
 
 interface LayoutRouteChildren {
   LayoutDashboardRoute: typeof LayoutDashboardRoute
-  LayoutUsersRoute: typeof LayoutUsersRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutEmployeesUsersRoute: typeof LayoutEmployeesUsersRoute
   LayoutExpensesListRoute: typeof LayoutExpensesListRoute
@@ -519,7 +504,6 @@ interface LayoutRouteChildren {
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutDashboardRoute: LayoutDashboardRoute,
-  LayoutUsersRoute: LayoutUsersRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutEmployeesUsersRoute: LayoutEmployeesUsersRoute,
   LayoutExpensesListRoute: LayoutExpensesListRoute,
@@ -557,7 +541,6 @@ export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
   '/login': typeof LoginRoute
   '/dashboard': typeof LayoutDashboardRoute
-  '/users': typeof LayoutUsersRoute
   '/': typeof LayoutIndexRoute
   '/employees/users': typeof LayoutEmployeesUsersRoute
   '/expenses/list': typeof LayoutExpensesListRoute
@@ -591,7 +574,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/dashboard': typeof LayoutDashboardRoute
-  '/users': typeof LayoutUsersRoute
   '/': typeof LayoutIndexRoute
   '/employees/users': typeof LayoutEmployeesUsersRoute
   '/expenses/list': typeof LayoutExpensesListRoute
@@ -627,7 +609,6 @@ export interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
   '/login': typeof LoginRoute
   '/_layout/dashboard': typeof LayoutDashboardRoute
-  '/_layout/users': typeof LayoutUsersRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/employees/users': typeof LayoutEmployeesUsersRoute
   '/_layout/expenses/list': typeof LayoutExpensesListRoute
@@ -664,7 +645,6 @@ export interface FileRouteTypes {
     | ''
     | '/login'
     | '/dashboard'
-    | '/users'
     | '/'
     | '/employees/users'
     | '/expenses/list'
@@ -697,7 +677,6 @@ export interface FileRouteTypes {
   to:
     | '/login'
     | '/dashboard'
-    | '/users'
     | '/'
     | '/employees/users'
     | '/expenses/list'
@@ -731,7 +710,6 @@ export interface FileRouteTypes {
     | '/_layout'
     | '/login'
     | '/_layout/dashboard'
-    | '/_layout/users'
     | '/_layout/'
     | '/_layout/employees/users'
     | '/_layout/expenses/list'
@@ -791,7 +769,6 @@ export const routeTree = rootRoute
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/dashboard",
-        "/_layout/users",
         "/_layout/",
         "/_layout/employees/users",
         "/_layout/expenses/list",
@@ -827,10 +804,6 @@ export const routeTree = rootRoute
     },
     "/_layout/dashboard": {
       "filePath": "_layout/dashboard.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/users": {
-      "filePath": "_layout/users.tsx",
       "parent": "/_layout"
     },
     "/_layout/": {

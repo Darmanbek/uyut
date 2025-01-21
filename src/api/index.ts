@@ -4,17 +4,14 @@ import { getToken } from "src/utils/storage.utils"
 
 
 const api = axios.create({
-	baseURL: BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+	baseURL: BASE_URL
 })
 
 api.interceptors.request.use((config) => {
 	const token = getToken()
-  if (token) {
+	if (token) {
 		config.headers.Authorization = `Bearer ${token}`
-  }
+	}
 	return config
 })
 

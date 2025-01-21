@@ -1,12 +1,20 @@
 import {
+	DeleteFilled,
+	EditFilled,
 	EyeOutlined,
 	FileImageOutlined,
 	QuestionCircleOutlined
 } from "@ant-design/icons"
 import { Avatar, Image, Popover, Space } from "antd"
-import { ColumnsType } from "antd/es/table"
+import type { ColumnsType } from "antd/es/table"
+import { ClientTable } from "src/components/shared/client"
 import { PrintDetailTable } from "src/components/shared/print-detail"
-import { SalesProduct } from "src/services/sales-products"
+import { Button } from "src/components/ui/button"
+import {
+	type SalesProduct,
+	useDeleteSalesProductsMutation
+} from "src/services/sales-products"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import {
 	formatDate,
 	formatEmpty,
@@ -14,6 +22,10 @@ import {
 } from "src/utils/formatter.utils"
 
 export const useSalesProductsColumns = () => {
+	const { mutate: deleteSalesProduct } = useDeleteSalesProductsMutation()
+
+	const editSalesProduct = useFormDevtoolsStore((state) => state.setParams)
+
 	const columns: ColumnsType<SalesProduct> = [
 		{
 			title: "Товар",
@@ -64,9 +76,19 @@ export const useSalesProductsColumns = () => {
 		},
 		{
 			title: "Клиент",
-			dataIndex: ["client", "full_name"],
+			dataIndex: ["client"],
 			key: "client",
-			render: formatEmpty
+			// render: formatEmpty
+			render: (value?: SalesProduct["client"]) => {
+				return (
+					<Space>
+						{formatEmpty(value?.full_name)}
+						<Popover content={<ClientTable data={value} />}>
+							<QuestionCircleOutlined style={{ cursor: "pointer" }} />
+						</Popover>
+					</Space>
+				)
+			}
 		},
 		{
 			title: "Файл",
@@ -95,6 +117,30 @@ export const useSalesProductsColumns = () => {
 			dataIndex: "created_at",
 			key: "created_at",
 			render: formatDate
+		},
+		{
+			width: 100,
+			fixed: "right",
+			title: "",
+			key: "actions",
+			render: (_v, record) => (
+				<Space>
+					<Button
+						onClick={() => editSalesProduct(record)}
+						tooltip={"Изменить"}
+						icon={<EditFilled />}
+					/>
+					<Button
+						confirm={{
+							title: record?.product?.name,
+							onConfirm: () => deleteSalesProduct(record?.id)
+						}}
+						tooltip={"Удалить"}
+						danger={true}
+						icon={<DeleteFilled />}
+					/>
+				</Space>
+			)
 		}
 	]
 

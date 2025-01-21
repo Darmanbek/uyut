@@ -12,7 +12,7 @@ const PrintDetailTable: FC<PrintDetailTableProps> = ({ data }) => {
 	return (
 		<>
 			<Table<PrintDetail>
-				title={data?.[0]?.print_type?.name}
+				title={data?.[0]?.print_type?.name || "Тип печати"}
 				size={"small"}
 				rowKey={(record) => record.id}
 				columns={columns}

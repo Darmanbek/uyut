@@ -26,7 +26,11 @@ function SalesProductsComponent() {
 	}
 	return (
 		<>
-			<SalesProductsTable params={params} onChangeParams={onChangeParams} />
+			<SalesProductsTable
+				readonly={true}
+				params={params}
+				onChangeParams={onChangeParams}
+			/>
 		</>
 	)
 }

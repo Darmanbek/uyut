@@ -5,15 +5,12 @@ export const getToken = () => {
 	return Cookies.get(EnumToken.TOKEN) || ""
 }
 
-
 export const saveToken = (token: string, remember?: boolean) => {
 	Cookies.set(EnumToken.TOKEN, token, {
 		sameSite: "strict",
-		expires: remember ? 30 : 7,
-		secure: true
+		expires: remember ? 30 : 7
 	})
 }
-
 
 export const removeToken = () => {
 	Cookies.remove(EnumToken.TOKEN)
