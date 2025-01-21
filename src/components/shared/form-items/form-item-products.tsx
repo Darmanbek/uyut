@@ -2,18 +2,19 @@ import { Form, Select } from "antd"
 import { type FC, useState } from "react"
 import { SELECT_PLACEHOLDER } from "src/constants/form.constants"
 import { useGetProductsQuery } from "src/services/products"
-import type { SalesProductForm } from "src/services/sales-products"
 
 const FormItemProducts: FC = () => {
 	const [params] = useState({
 		page: 1,
-		limit: 10
+		limit: 1000
 	})
 
 	const { data: products, isLoading, isFetching } = useGetProductsQuery(params)
 
 	return (
-		<Form.Item<SalesProductForm>
+		<Form.Item<{
+			product_id: number
+		}>
 			name={"product_id"}
 			label={"Товар"}
 			rules={[{ required: true }]}>

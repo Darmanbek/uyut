@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router"
+import { createFileRoute, Navigate, redirect } from "@tanstack/react-router"
 import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout/settings/")({
@@ -12,8 +12,5 @@ export const Route = createFileRoute("/_layout/settings/")({
 })
 
 function IndexComponent() {
-	return redirect({
-		href: ROUTES.SETTINGS_PRINT_TYPES,
-		replace: true
-	})
+	return <Navigate to={ROUTES.SETTINGS_PRINT_TYPES} replace={true} />
 }

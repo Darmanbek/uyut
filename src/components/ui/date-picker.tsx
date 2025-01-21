@@ -1,5 +1,6 @@
 import { CalendarFilled } from "@ant-design/icons"
 import {
+	ConfigProvider,
 	DatePicker as AntdDatePicker,
 	DatePickerProps as AntdDatePickerProps,
 	Space
@@ -13,24 +14,33 @@ interface DatePickerProps extends AntdDatePickerProps {
 }
 
 const DatePicker = forwardRef<PickerRef, DatePickerProps>(
-	({ onToday, ...rest }, ref) => {
-		return (
-			<Space.Compact>
-				<AntdDatePicker
-					ref={ref}
-					format={{
-						format: "DD.MM.YYYY",
-						type: "mask"
-					}}
-					{...rest}
-				/>
+	({ onToday, style, ...rest }, ref) => {
+		const datePicker = (
+			<AntdDatePicker
+				ref={ref}
+				style={{ width: "100%", ...style }}
+				format={{
+					format: "DD.MM.YYYY",
+					type: "mask"
+				}}
+				{...rest}
+			/>
+		)
+
+		const datePickerWithToday = onToday ? (
+			<Space.Compact style={{ width: "100%" }}>
+				{datePicker}
 				<Button
 					tooltip={"Сегодня"}
 					icon={<CalendarFilled />}
 					onClick={onToday}
 				/>
 			</Space.Compact>
+		) : (
+			datePicker
 		)
+
+		return <ConfigProvider>{datePickerWithToday}</ConfigProvider>
 	}
 )
 DatePicker.displayName = "DatePicker"

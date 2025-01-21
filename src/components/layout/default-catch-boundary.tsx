@@ -20,7 +20,15 @@ const DefaultCatchBoundary: FC<ErrorComponentProps> = ({ error }) => {
 
 	return (
 		<MainLayout
-			style={isRoot ? { height: "100vh" } : { flexGrow: 1, height: "100%" }}>
+			style={
+				isRoot
+					? { height: "100vh", width: "100%" }
+					: {
+							flexGrow: 1,
+							height: "100%",
+							width: "100%"
+						}
+			}>
 			<Flex align={"center"} justify={"center"} style={{ height: "100%" }}>
 				<Result
 					status={"500"}

@@ -4,6 +4,7 @@ import { Button } from "src/components/ui/button"
 import { Table } from "src/components/ui/table"
 import { type Expense, useGetExpensesQuery } from "src/services/expenses"
 import { GetParams } from "src/services/shared"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { useExpensesColumns } from "../hooks/use-expenses-columns"
 
 interface ExpensesTableProps {
@@ -28,6 +29,8 @@ const ExpensesTable: FC<ExpensesTableProps> = ({
 		limit: limit || 10
 	})
 
+	const toggleForm = useFormDevtoolsStore((state) => state.toggleForm)
+
 	const columns = useExpensesColumns()
 	return (
 		<>
@@ -35,7 +38,11 @@ const ExpensesTable: FC<ExpensesTableProps> = ({
 				rowKey={(record) => record.id}
 				title={"Расходы"}
 				extra={
-					readonly ? null : <Button icon={<PlusOutlined />}>Добавить</Button>
+					readonly ? null : (
+						<Button icon={<PlusOutlined />} onClick={toggleForm}>
+							Добавить
+						</Button>
+					)
 				}
 				columns={columns.filter((el) => (readonly ? el.key !== "actions" : el))}
 				loading={isLoading || isFetching}

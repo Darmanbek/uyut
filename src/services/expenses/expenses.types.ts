@@ -4,10 +4,17 @@ import type { User } from "src/services/users"
 type Expense = {
 	id: number
 	expense_type: ExpenseType
-	title: string
-	amount: string
+	name: string
+	amount: number | string
 	cashier: User
 	created_at: string
 }
 
-export type { Expense }
+type ExpenseForm = {
+	id?: number
+	expense_id: number
+	name: string
+	amount: number | string
+}
+
+export type { Expense, ExpenseForm }

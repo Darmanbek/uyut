@@ -1,5 +1,11 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
-import { MainLayout, Header, InnerLayout, Sidebar, MainContent } from "src/components/layout"
+import {
+	Header,
+	InnerLayout,
+	MainContent,
+	MainLayout,
+	Sidebar
+} from "src/components/layout"
 import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout")({
@@ -27,6 +33,5 @@ function LayoutComponent() {
 				</MainContent>
 			</InnerLayout>
 		</MainLayout>
-	
 	)
 }

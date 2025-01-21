@@ -1,5 +1,5 @@
 import { Image, Space, Typography } from "antd"
-import { type  FC } from "react"
+import { type FC } from "react"
 
 const Logo: FC = () => {
 	return (
@@ -7,12 +7,11 @@ const Logo: FC = () => {
 			<Image
 				preview={false}
 				style={{ width: 38, height: 38 }}
-				src={"/apple-touch-icon.png"}
-				fallback={"/public/apple-touch-icon.png"} alt={""}
+				src={"/logo.png"}
+				fallback={"/public/apple-touch-icon.png"}
+				alt={""}
 			/>
-			<Typography.Title level={3}>
-				UYUT
-			</Typography.Title>
+			<Typography.Title level={3}>UYUT</Typography.Title>
 		</Space>
 	)
 }

@@ -6,11 +6,23 @@ import {
 import { Popover, Space } from "antd"
 import { ColumnsType } from "antd/es/table"
 import { Button } from "src/components/ui/button"
-import { WriteOffProduct } from "src/services/write-off-products"
-import { formatDate, formatEmpty } from "src/utils/formatter.utils"
+import {
+	useDeleteWriteOffProductsMutation,
+	WriteOffProduct
+} from "src/services/write-off-products"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
+import {
+	formatDate,
+	formatEmpty,
+	formatPriceUZS
+} from "src/utils/formatter.utils"
 import { ProductMiniTable } from "../ui/product-mini-table"
 
 export const useWriteOffProductsColumns = () => {
+	const { mutate: deleteWriteOffProduct } = useDeleteWriteOffProductsMutation()
+
+	const editWriteOffProduct = useFormDevtoolsStore((state) => state.setParams)
+
 	const columns: ColumnsType<WriteOffProduct> = [
 		{
 			title: "Название",
@@ -47,7 +59,7 @@ export const useWriteOffProductsColumns = () => {
 			title: "Сумма",
 			dataIndex: "amount",
 			key: "amount",
-			render: formatEmpty
+			render: formatPriceUZS
 		},
 		{
 			title: "Дата",
@@ -60,10 +72,22 @@ export const useWriteOffProductsColumns = () => {
 			width: 100,
 			title: "",
 			key: "actions",
-			render: () => (
+			render: (_v, record) => (
 				<Space>
-					<Button tooltip={"Изменить"} icon={<EditFilled />} />
-					<Button tooltip={"Удалить"} danger={true} icon={<DeleteFilled />} />
+					<Button
+						onClick={() => editWriteOffProduct(record)}
+						tooltip={"Изменить"}
+						icon={<EditFilled />}
+					/>
+					<Button
+						confirm={{
+							title: record?.name,
+							onConfirm: () => deleteWriteOffProduct(record?.id)
+						}}
+						tooltip={"Удалить"}
+						danger={true}
+						icon={<DeleteFilled />}
+					/>
 				</Space>
 			)
 		}

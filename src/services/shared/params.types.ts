@@ -8,6 +8,7 @@ type GetParams = {
 	month?: string | number
 	type?: FinanceType
 	price_type?: FinancePriceType
+	redirect?: string
 }
 
 type ParamId = number | string | undefined

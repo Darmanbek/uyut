@@ -7,6 +7,8 @@ import { Popover, Space } from "antd"
 import { ColumnsType } from "antd/es/table"
 import { Button } from "src/components/ui/button"
 import { Expense } from "src/services/expenses"
+import { useDeleteExpenseTypesMutation } from "src/services/shared/expense-types"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import {
 	formatDate,
 	formatEmpty,
@@ -15,6 +17,10 @@ import {
 import { CashierMiniTable } from "../ui/cashier-mini-table"
 
 export const useExpensesColumns = () => {
+	const { mutate: deleteExpenseType } = useDeleteExpenseTypesMutation()
+
+	const editExpenseType = useFormDevtoolsStore((state) => state.setParams)
+
 	const columns: ColumnsType<Expense> = [
 		{
 			title: "Название",
@@ -58,10 +64,22 @@ export const useExpensesColumns = () => {
 			width: 100,
 			title: "",
 			key: "actions",
-			render: () => (
+			render: (_v, record) => (
 				<Space>
-					<Button tooltip={"Изменить"} icon={<EditFilled />} />
-					<Button tooltip={"Удалить"} danger={true} icon={<DeleteFilled />} />
+					<Button
+						onClick={() => editExpenseType(record)}
+						tooltip={"Изменить"}
+						icon={<EditFilled />}
+					/>
+					<Button
+						confirm={{
+							title: record?.name,
+							onConfirm: () => deleteExpenseType(record?.id)
+						}}
+						tooltip={"Удалить"}
+						danger={true}
+						icon={<DeleteFilled />}
+					/>
 				</Space>
 			)
 		}

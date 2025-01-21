@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router"
+import { createFileRoute, Navigate, redirect } from "@tanstack/react-router"
 import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout/finances/")({
@@ -12,8 +12,5 @@ export const Route = createFileRoute("/_layout/finances/")({
 })
 
 function IndexComponent() {
-	return redirect({
-		href: ROUTES.FINANCES_COMING_PRODUCTS,
-		replace: true
-	})
+	return <Navigate to={ROUTES.FINANCES_COMING_PRODUCTS} replace={true} />
 }

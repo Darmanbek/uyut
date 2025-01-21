@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router"
+import { createFileRoute, Navigate, redirect } from "@tanstack/react-router"
 import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout/store/")({
@@ -11,7 +11,5 @@ export const Route = createFileRoute("/_layout/store/")({
 })
 
 function IndexComponent() {
-	return redirect({
-		href: ROUTES.STORE_PRODUCTS
-	})
+	return <Navigate to={ROUTES.STORE_PRODUCTS} replace={true} />
 }

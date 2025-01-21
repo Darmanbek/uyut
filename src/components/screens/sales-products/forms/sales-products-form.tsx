@@ -4,6 +4,7 @@ import { UploadChangeParam, UploadFile } from "antd/es/upload"
 import { type FC, useEffect } from "react"
 import { PatternFormat } from "react-number-format"
 import { FormDrawer } from "src/components/shared/form-drawer"
+import { FormItemProducts } from "src/components/shared/form-items"
 import { Input } from "src/components/ui/input"
 import { InputPrice } from "src/components/ui/input-price"
 import { FORM_DEFAULT } from "src/constants/form.constants"
@@ -17,11 +18,7 @@ import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { formatPhoneForm } from "src/utils/formatter.utils"
 import { isParamsFormValidate } from "src/utils/validate.utils"
 import { salesProductsFormData } from "../utils/sales-products-form-data"
-import {
-	FormItemPaymentType,
-	FormItemPrintType,
-	FormItemProducts
-} from "./form-items"
+import { FormItemPaymentType, FormItemPrintType } from "./form-items"
 
 const SalesProductsForm: FC = () => {
 	const [form] = Form.useForm<SalesProductForm>()

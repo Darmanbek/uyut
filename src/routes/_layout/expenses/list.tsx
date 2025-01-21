@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { ExpensesTable } from "src/components/screens/expenses"
+import { ExpensesForm, ExpensesTable } from "src/components/screens/expenses"
 import { GetParams } from "src/services/shared"
 
 export const Route = createFileRoute("/_layout/expenses/list")({
@@ -26,6 +26,7 @@ function ExpensesComponent() {
 	}
 	return (
 		<>
+			<ExpensesForm />
 			<ExpensesTable params={params} onChangeParams={onChangeParams} />
 		</>
 	)

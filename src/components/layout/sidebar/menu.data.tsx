@@ -4,7 +4,6 @@ import {
 	ClockCircleOutlined,
 	DollarCircleOutlined,
 	ExportOutlined,
-	HomeOutlined,
 	ImportOutlined,
 	MinusCircleOutlined,
 	MinusSquareOutlined,
@@ -23,11 +22,11 @@ import type { MenuProps } from "antd"
 import { ROUTES } from "src/config/routes.config"
 
 export const menu: MenuProps["items"] = [
-	{
-		key: ROUTES.HOME,
-		icon: <HomeOutlined />,
-		label: "Главная"
-	},
+	// {
+	// 	key: ROUTES.HOME,
+	// 	icon: <HomeOutlined />,
+	// 	label: "Главная"
+	// },
 	// Печатник
 	{
 		key: ROUTES.STORE_GROUP,

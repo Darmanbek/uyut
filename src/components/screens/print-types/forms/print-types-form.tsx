@@ -3,10 +3,13 @@ import { type FC, useEffect } from "react"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
 import {
+	PrintType,
 	PrintTypeForm,
-	useCreatePrintTypesMutation
+	useCreatePrintTypesMutation,
+	useEditPrintTypesMutation
 } from "src/services/shared/print-types"
 import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
+import { isParamsFormValidate } from "src/utils/validate.utils"
 
 const PrintTypesForm: FC = () => {
 	const [form] = Form.useForm<PrintTypeForm>()
@@ -16,7 +19,25 @@ const PrintTypesForm: FC = () => {
 	const { mutate: addPrintType, isPending: addLoading } =
 		useCreatePrintTypesMutation()
 
+	const { mutate: editPrintType, isPending: editLoading } =
+		useEditPrintTypesMutation()
+
 	const onFinish: FormProps<PrintTypeForm>["onFinish"] = async (values) => {
+		if (isParamsFormValidate<PrintType>(params)) {
+			editPrintType(
+				{
+					...values,
+					id: params.id
+				},
+				{
+					onSuccess: () => {
+						resetParams()
+						form.resetFields()
+					}
+				}
+			)
+			return
+		}
 		addPrintType(values, {
 			onSuccess: () => {
 				resetParams()
@@ -33,8 +54,12 @@ const PrintTypesForm: FC = () => {
 		}
 	}, [form, params])
 	return (
-		<FormDrawer form={form} isLoading={addLoading}>
-			<Form {...FORM_DEFAULT} name={"print-type-form"} form={form} onFinish={onFinish}>
+		<FormDrawer form={form} isLoading={addLoading || editLoading}>
+			<Form
+				{...FORM_DEFAULT}
+				name={"print-type-form"}
+				form={form}
+				onFinish={onFinish}>
 				<Form.Item<PrintTypeForm>
 					name={"name"}
 					label={"Название"}

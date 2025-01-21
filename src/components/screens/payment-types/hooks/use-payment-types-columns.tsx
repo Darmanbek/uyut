@@ -6,10 +6,13 @@ import {
 	PaymentType,
 	useDeletePaymentTypesMutation
 } from "src/services/shared/payment-types"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { formatEmpty } from "src/utils/formatter.utils"
 
 const usePaymentTypesColumns = () => {
 	const { mutate: deletePaymentType } = useDeletePaymentTypesMutation()
+
+	const editPaymentType = useFormDevtoolsStore((state) => state.setParams)
 
 	const columns: ColumnsType<PaymentType> = [
 		{
@@ -32,7 +35,11 @@ const usePaymentTypesColumns = () => {
 			key: "actions",
 			render: (_v, record) => (
 				<Space>
-					<Button tooltip={"Изменить"} icon={<EditFilled />} />
+					<Button
+						onClick={() => editPaymentType(record)}
+						tooltip={"Изменить"}
+						icon={<EditFilled />}
+					/>
 					<Button
 						confirm={{
 							title: record.name,
