@@ -24,6 +24,7 @@ type SalesProductForm = {
 	length?: number
 	print_type_id?: number
 	payment_type_id?: number
+	client_id?: number
 	file?: RcFile | UploadFile[]
 	full_name?: string
 	phone?: string

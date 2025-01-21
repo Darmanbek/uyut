@@ -37,7 +37,8 @@ const SalesProductsForm: FC = () => {
 			editSalesProduct(
 				{
 					formData,
-					id: params.id
+					id: params?.id,
+					client_id: params?.client?.id
 				},
 				{
 					onSuccess: () => {
