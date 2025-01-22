@@ -9,13 +9,11 @@ type PrintDetail = {
 }
 
 type PrintDetailForm = {
+	id?: number
 	print_type_id: number
 	meter: number
 	print_cost: string
 	material_cost: string
 }
 
-export type {
-	PrintDetail,
-	PrintDetailForm
-}
+export type { PrintDetail, PrintDetailForm }

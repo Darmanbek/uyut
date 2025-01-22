@@ -1,4 +1,9 @@
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import {
+	keepPreviousData,
+	useMutation,
+	useQuery,
+	useQueryClient
+} from "@tanstack/react-query"
 import { useMessage } from "src/hooks/use-message"
 import type { GetParams, ParamId, ResponseError } from "../shared"
 import type { PrintDetailForm } from "./print-details"
@@ -54,19 +59,19 @@ const useGetProductsPrintDetailsByIdQuery = (id: ParamId) => {
 	})
 }
 
-
 const useCreateProductsPrintDetailsMutation = (id: ParamId) => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: (form: PrintDetailForm) => productsService.createPrintDetailsById(id, form),
+		mutationFn: (form: PrintDetailForm) =>
+			productsService.createPrintDetailsById(id, form),
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({
-				queryKey: ["products"]
+				queryKey: ["products", "print-details"]
 			})
 			message.success({
 				message: "Success",
-				description: "Product created successfully"
+				description: "Product detail created successfully"
 			})
 		},
 		onError: (error: ResponseError) => {

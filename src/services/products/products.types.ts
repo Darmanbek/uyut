@@ -7,6 +7,7 @@ type Product = {
 	width: number
 	length: number
 	meter_square: number
+	remainder_square_meter: number
 	price_uzs: string | number
 	price_usd: string | number
 	supplier: Supplier
@@ -24,8 +25,4 @@ type ProductForm = {
 	supplier_id: number
 }
 
-
-export type {
-	Product,
-	ProductForm
-}
+export type { Product, ProductForm }

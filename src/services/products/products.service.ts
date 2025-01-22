@@ -32,7 +32,7 @@ class ProductsService {
 		id: ParamId,
 		form: PrintDetailForm
 	): Promise<ResponseSingleData<PrintDetail>> => {
-		const response = await api.post(`/products/${id}/print-detail`, form)
+		const response = await api.post(`/products/${id}/print-details`, form)
 		return response.data
 	}
 }
