@@ -17,7 +17,6 @@
     "@tanstack/react-query-devtools": "^5.64.0",
     "@tanstack/react-router": "^1.95.3",
     "@tanstack/react-router-with-query": "^1.95.3",
-    "@tanstack/router-devtools": "^1.95.3",
     "antd": "^5.23.0",
     "antd-style": "^3.7.1",
     "axios": "^1.7.9",
@@ -34,6 +33,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
+    "@tanstack/router-devtools": "^1.97.8",
     "@tanstack/router-plugin": "^1.95.3",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.10.5",
@@ -48,6 +48,6 @@
     "globals": "^15.14.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.19.1",
-    "vite": "^6.0.3"
+    "vite": "^6.0.11"
   }
 }
