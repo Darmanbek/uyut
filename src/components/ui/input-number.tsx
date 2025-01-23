@@ -14,6 +14,7 @@ const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>(
 					ref={ref}
 					placeholder={INPUT_PLACEHOLDER}
 					style={{ width: "100%", ...style }}
+					min={0}
 					{...rest}
 				/>
 			</ConfigProvider>

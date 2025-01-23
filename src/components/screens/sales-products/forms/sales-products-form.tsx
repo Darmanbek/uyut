@@ -5,8 +5,8 @@ import { type FC, useEffect } from "react"
 import { PatternFormat } from "react-number-format"
 import { FormDrawer } from "src/components/shared/form-drawer"
 import { FormItemProducts } from "src/components/shared/form-items"
+import { InputNumber } from "src/components/ui"
 import { Input } from "src/components/ui/input"
-import { InputPrice } from "src/components/ui/input-price"
 import { FORM_DEFAULT } from "src/constants/form.constants"
 import {
 	SalesProduct,
@@ -82,7 +82,7 @@ const SalesProductsForm: FC = () => {
 					name={"length"}
 					label={"Длина"}
 					rules={[{ required: true }]}>
-					<InputPrice />
+					<InputNumber />
 				</Form.Item>
 				<FormItemPrintType form={form} />
 				<FormItemPaymentType />

@@ -19,6 +19,7 @@ const FormItemProducts: FC = () => {
 			label={"Товар"}
 			rules={[{ required: true }]}>
 			<Select
+				disabled={isLoading}
 				placeholder={SELECT_PLACEHOLDER}
 				loading={isLoading || isFetching}
 				options={products?.data?.map((product) => ({

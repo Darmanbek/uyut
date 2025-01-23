@@ -1,6 +1,7 @@
-import { Col, Form, type FormProps, Input, InputNumber, Row } from "antd"
+import { Col, Form, type FormProps, Input, Row } from "antd"
 import { type FC, useEffect } from "react"
 import { FormDrawer } from "src/components/shared/form-drawer"
+import { InputNumber, InputPrice } from "src/components/ui"
 import { FORM_DEFAULT, INPUT_PLACEHOLDER } from "src/constants/form.constants"
 import {
 	type ProductForm,
@@ -41,7 +42,11 @@ const ProductsForm: FC = () => {
 	}, [form, params])
 	return (
 		<FormDrawer width={400} form={form} isLoading={addLoading}>
-			<Form {...FORM_DEFAULT} name={"product-form"} form={form} onFinish={onFinish}>
+			<Form
+				{...FORM_DEFAULT}
+				name={"product-form"}
+				form={form}
+				onFinish={onFinish}>
 				<Form.Item<ProductForm>
 					name={"name"}
 					label={"Название"}
@@ -54,10 +59,7 @@ const ProductsForm: FC = () => {
 							name={"width"}
 							label={"Ширина"}
 							rules={[{ required: true }]}>
-							<InputNumber
-								style={{ width: "100%" }}
-								placeholder={INPUT_PLACEHOLDER}
-							/>
+							<InputPrice />
 						</Form.Item>
 					</Col>
 					<Col span={12}>
@@ -65,10 +67,7 @@ const ProductsForm: FC = () => {
 							name={"length"}
 							label={"Длина"}
 							rules={[{ required: true }]}>
-							<InputNumber
-								style={{ width: "100%" }}
-								placeholder={INPUT_PLACEHOLDER}
-							/>
+							<InputNumber />
 						</Form.Item>
 					</Col>
 				</Row>
@@ -76,10 +75,7 @@ const ProductsForm: FC = () => {
 					name={"meter_square"}
 					label={"Плошадь"}
 					rules={[{ required: true }]}>
-					<InputNumber
-						style={{ width: "100%" }}
-						placeholder={INPUT_PLACEHOLDER}
-					/>
+					<InputNumber />
 				</Form.Item>
 				<FormItemPrice form={form} />
 				<FormItemSuppliers />

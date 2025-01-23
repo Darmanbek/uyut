@@ -1,3 +1,4 @@
+import { LoadingOutlined } from "@ant-design/icons"
 import { QueryClient } from "@tanstack/react-query"
 import { createRouter as createTanStackRouter } from "@tanstack/react-router"
 import { routerWithQueryClient } from "@tanstack/react-router-with-query"
@@ -29,7 +30,16 @@ export const createRouter = () => {
 			},
 			defaultPreload: "intent",
 			defaultErrorComponent: DefaultCatchBoundary,
-			defaultPendingComponent: () => <Spin spinning={true} fullscreen={true} />,
+			defaultPendingComponent: () => (
+				<Spin
+					spinning={true}
+					fullscreen={true}
+					size={"large"}
+					indicator={
+						<LoadingOutlined spin={true} style={{ color: "#ffffff" }} />
+					}
+				/>
+			),
 			defaultNotFoundComponent: (props) => <NotFound {...props} />
 		}),
 		queryClient
