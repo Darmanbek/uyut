@@ -1,4 +1,4 @@
-import { createFileRoute, Navigate, redirect } from "@tanstack/react-router"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 import { ROUTES } from "src/config/routes.config"
 
 export const Route = createFileRoute("/_layout/")({
@@ -12,5 +12,10 @@ export const Route = createFileRoute("/_layout/")({
 })
 
 function HomeComponent() {
-	return <Navigate to={ROUTES.STORE_PRODUCTS} replace={true} />
+	return (
+		<>
+			{/*<Navigate to={ROUTES.STORE_PRODUCTS} replace={true} />*/}
+			<h1>Home</h1>
+		</>
+	)
 }

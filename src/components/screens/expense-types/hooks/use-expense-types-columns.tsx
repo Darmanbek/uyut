@@ -6,10 +6,12 @@ import {
 	ExpenseType,
 	useDeleteExpenseTypesMutation
 } from "src/services/shared/expense-types"
+import { useFormDevtoolsStore } from "src/store/use-form-devtools-store"
 import { formatEmpty } from "src/utils/formatter.utils"
 
 const useExpenseTypesColumns = () => {
 	const { mutate: deleteExpenseType } = useDeleteExpenseTypesMutation()
+	const editExpenseType = useFormDevtoolsStore((state) => state.setParams)
 
 	const columns: ColumnsType<ExpenseType> = [
 		{
@@ -32,7 +34,11 @@ const useExpenseTypesColumns = () => {
 			key: "actions",
 			render: (_v, record) => (
 				<Space>
-					<Button tooltip={"Изменить"} icon={<EditFilled />} />
+					<Button
+						onClick={() => editExpenseType(record)}
+						tooltip={"Изменить"}
+						icon={<EditFilled />}
+					/>
 					<Button
 						confirm={{
 							title: record?.name,

@@ -1,5 +1,7 @@
-enum EnumToken {
-	TOKEN = "token"
+enum EnumCookies {
+	TOKEN = "token",
+	THEME = "theme",
+	ROLE = "role"
 }
 
 enum EnumRole {
@@ -9,13 +11,8 @@ enum EnumRole {
 }
 
 enum EnumTheme {
-	THEME = "theme",
 	DARK = "dark",
 	LIGHT = "light"
 }
 
-export {
-	EnumToken,
-	EnumRole,
-	EnumTheme
-}
+export { EnumCookies, EnumRole, EnumTheme }

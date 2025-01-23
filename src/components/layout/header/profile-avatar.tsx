@@ -23,7 +23,7 @@ const ProfileAvatar: FC = () => {
 	}, [auth, isError, router])
 	return (
 		<ProfileMenuContainer>
-			<Space style={{ cursor: "pointer" }} align={"center"}>
+			<Space style={{ cursor: "pointer", userSelect: "none" }} align={"center"}>
 				<Avatar
 					src={"/logo-alt.png"}
 					alt={""}

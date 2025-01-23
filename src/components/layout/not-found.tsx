@@ -1,10 +1,13 @@
 import { ArrowLeftOutlined } from "@ant-design/icons"
-import { Link, NotFoundRouteProps } from "@tanstack/react-router"
+import { NotFoundRouteProps, useRouter } from "@tanstack/react-router"
 import { Button, Flex, Result, Space } from "antd"
 import { type FC, PropsWithChildren } from "react"
+import { ROUTES } from "src/config/routes.config"
 import { MainLayout } from "./main-layout"
 
 const NotFound: FC<PropsWithChildren<NotFoundRouteProps>> = ({ children }) => {
+	const router = useRouter()
+
 	return (
 		<MainLayout>
 			<Flex align={"center"} justify={"center"} style={{ height: "100vh" }}>
@@ -16,10 +19,14 @@ const NotFound: FC<PropsWithChildren<NotFoundRouteProps>> = ({ children }) => {
 							<Button
 								icon={<ArrowLeftOutlined />}
 								type={"primary"}
-								onClick={() => window.history.back()}>
+								onClick={() => router.history.back()}>
 								Назад
 							</Button>
-							<Link to={"/"}>На главную</Link>
+							<Button
+								type={"link"}
+								onClick={() => router.history.replace(ROUTES.HOME)}>
+								На главную
+							</Button>
 						</Space>
 					}>
 					<div>
