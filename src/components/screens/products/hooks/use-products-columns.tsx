@@ -1,10 +1,15 @@
 import { EyeFilled } from "@ant-design/icons"
 import { useLocation, useRouter } from "@tanstack/react-router"
-import { Space } from "antd"
+import { Divider, Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { Button } from "src/components/ui/button"
 import type { Product } from "src/services/products"
-import { formatDate, formatEmpty, formatPrice } from "src/utils/formatter.utils"
+import {
+	formatDate,
+	formatEmpty,
+	formatPriceUSD,
+	formatPriceUZS
+} from "src/utils/formatter.utils"
 
 export const useProductsColumns = () => {
 	const { history } = useRouter()
@@ -18,46 +23,43 @@ export const useProductsColumns = () => {
 			render: formatEmpty
 		},
 		{
-			title: "Размер",
-			key: "size",
-			children: [
-				{
-					title: "Длина",
-					dataIndex: "length",
-					key: "length",
-					render: formatEmpty
-				},
-				{
-					title: "Ширина",
-					dataIndex: "width",
-					key: "width",
-					render: formatEmpty
-				},
-				{
-					title: "Площадь",
-					dataIndex: "meter_square",
-					key: "meter_square",
-					render: formatEmpty
-				}
-			]
+			align: "center",
+			title: "Длина",
+			dataIndex: "length",
+			key: "length",
+			render: formatEmpty
 		},
 		{
+			align: "center",
+			title: "Ширина",
+			dataIndex: "width",
+			key: "width",
+			render: formatEmpty
+		},
+		{
+			align: "center",
+			title: "Площадь",
+			dataIndex: "meter_square",
+			key: "meter_square",
+			render: formatEmpty
+		},
+		{
+			align: "center",
+			title: "Остаток площади",
+			dataIndex: "remainder_square_meter",
+			key: "remainder_square_meter",
+			render: formatEmpty
+		},
+		{
+			align: "center",
 			title: "Цена",
 			key: "price",
-			children: [
-				{
-					title: "UZS",
-					dataIndex: "price_uzs",
-					key: "price_uzs",
-					render: formatPrice
-				},
-				{
-					title: "USD",
-					dataIndex: "price_usd",
-					key: "price_usd",
-					render: formatPrice
-				}
-			]
+			render: (_v, record) => (
+				<Space split={<Divider type={"vertical"} />}>
+					{formatPriceUZS(record.price_uzs)}
+					{formatPriceUSD(record.price_usd)}
+				</Space>
+			)
 		},
 		{
 			title: "Поставщик",
@@ -65,12 +67,7 @@ export const useProductsColumns = () => {
 			key: "supplier",
 			render: formatEmpty
 		},
-		{
-			title: "Остаток площади",
-			dataIndex: "remainder_square_meter",
-			key: "remainder_square_meter",
-			render: formatEmpty
-		},
+
 		{
 			title: "Создан",
 			dataIndex: "created_at",
