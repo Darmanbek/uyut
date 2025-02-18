@@ -35,8 +35,8 @@ const useProductDetailsColumns = () => {
 		},
 		{
 			title: "Стоимость материала",
-			dataIndex: "print_cost",
-			key: "print_cost",
+			dataIndex: "material_cost",
+			key: "material_cost",
 			render: formatPriceUZS
 		},
 		{
